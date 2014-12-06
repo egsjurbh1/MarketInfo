@@ -1,0 +1,9 @@
+D:\Project\C#\MarketInfo\MarketInfo\bin\Debug\MarketInfo.exe.config
+D:\Project\C#\MarketInfo\MarketInfo\obj\Debug\MarketInfo.csprojResolveAssemblyReference.cache
+D:\Project\C#\MarketInfo\MarketInfo\obj\Debug\MarketInfo.MainForm.resources
+D:\Project\C#\MarketInfo\MarketInfo\obj\Debug\MarketInfo.Properties.Resources.resources
+D:\Project\C#\MarketInfo\MarketInfo\obj\Debug\MarketInfo.csproj.GenerateResource.Cache
+D:\Project\C#\MarketInfo\MarketInfo\bin\Debug\MarketInfo.exe
+D:\Project\C#\MarketInfo\MarketInfo\bin\Debug\MarketInfo.pdb
+D:\Project\C#\MarketInfo\MarketInfo\obj\Debug\MarketInfo.exe
+D:\Project\C#\MarketInfo\MarketInfo\obj\Debug\MarketInfo.pdb
