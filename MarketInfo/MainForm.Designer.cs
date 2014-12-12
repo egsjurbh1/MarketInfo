@@ -39,10 +39,9 @@
             this.ClearFileBt = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.openfilebt = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.getstockdatabt = new System.Windows.Forms.Button();
             this.DeleteStockbt = new System.Windows.Forms.Button();
             this.AddStockbt = new System.Windows.Forms.Button();
             this.stockntb = new System.Windows.Forms.TextBox();
@@ -51,7 +50,6 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.Market_comboB = new System.Windows.Forms.ComboBox();
             this.SH000001pB = new System.Windows.Forms.PictureBox();
-            this.stockdataSet = new System.Data.DataSet();
             this.panel2 = new System.Windows.Forms.Panel();
             this.stockinfo_tab = new System.Windows.Forms.TabControl();
             this.stockbasictab = new System.Windows.Forms.TabPage();
@@ -115,22 +113,33 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.stock_t = new System.Windows.Forms.Timer(this.components);
+            this.toolStrip = new System.Windows.Forms.ToolStrip();
+            this.systemDDB = new System.Windows.Forms.ToolStripDropDownButton();
+            this.系统参数ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.desitionmakeDDB = new System.Windows.Forms.ToolStripDropDownButton();
+            this.AdvDMMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpDDButton = new System.Windows.Forms.ToolStripDropDownButton();
+            this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.toolStatusl = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SH000001pB)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.stockdataSet)).BeginInit();
             this.panel2.SuspendLayout();
             this.stockinfo_tab.SuspendLayout();
             this.stockbasictab.SuspendLayout();
             this.stockmarkettab.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.toolStrip.SuspendLayout();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(5, 81);
+            this.button1.Location = new System.Drawing.Point(9, 49);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
@@ -145,7 +154,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(94, 82);
+            this.button2.Location = new System.Drawing.Point(90, 49);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 2;
@@ -171,9 +180,9 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(54, 51);
+            this.button4.Location = new System.Drawing.Point(181, 19);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.Size = new System.Drawing.Size(51, 23);
             this.button4.TabIndex = 7;
             this.button4.Text = "确定";
             this.button4.UseVisualStyleBackColor = true;
@@ -181,10 +190,10 @@
             // 
             // ClearFileBt
             // 
-            this.ClearFileBt.Location = new System.Drawing.Point(5, 109);
-            this.ClearFileBt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ClearFileBt.Location = new System.Drawing.Point(251, 19);
+            this.ClearFileBt.Margin = new System.Windows.Forms.Padding(2);
             this.ClearFileBt.Name = "ClearFileBt";
-            this.ClearFileBt.Size = new System.Drawing.Size(73, 23);
+            this.ClearFileBt.Size = new System.Drawing.Size(67, 23);
             this.ClearFileBt.TabIndex = 8;
             this.ClearFileBt.Text = "清空文件";
             this.ClearFileBt.UseVisualStyleBackColor = true;
@@ -193,27 +202,25 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.openfilebt);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.listBox1);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.ClearFileBt);
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Location = new System.Drawing.Point(82, 346);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Location = new System.Drawing.Point(103, 343);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox1.Size = new System.Drawing.Size(418, 148);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Size = new System.Drawing.Size(331, 89);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "信息抓取";
             // 
             // openfilebt
             // 
-            this.openfilebt.Location = new System.Drawing.Point(94, 109);
-            this.openfilebt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.openfilebt.Location = new System.Drawing.Point(251, 49);
+            this.openfilebt.Margin = new System.Windows.Forms.Padding(2);
             this.openfilebt.Name = "openfilebt";
             this.openfilebt.Size = new System.Drawing.Size(67, 23);
             this.openfilebt.TabIndex = 17;
@@ -221,53 +228,47 @@
             this.openfilebt.UseVisualStyleBackColor = true;
             this.openfilebt.Click += new System.EventHandler(this.openfilebt_Click);
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(227, 16);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 12);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "控制台信息";
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(230, 31);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(182, 112);
-            this.listBox1.TabIndex = 16;
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.panel1);
             this.groupBox2.Controls.Add(this.optionallist);
-            this.groupBox2.Location = new System.Drawing.Point(831, 7);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Location = new System.Drawing.Point(860, 27);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox2.Size = new System.Drawing.Size(192, 501);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox2.Size = new System.Drawing.Size(192, 441);
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "自选";
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.getstockdatabt);
             this.panel1.Controls.Add(this.DeleteStockbt);
             this.panel1.Controls.Add(this.AddStockbt);
             this.panel1.Controls.Add(this.stockntb);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(8, 346);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Location = new System.Drawing.Point(8, 285);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(177, 148);
+            this.panel1.Size = new System.Drawing.Size(177, 147);
             this.panel1.TabIndex = 14;
+            // 
+            // getstockdatabt
+            // 
+            this.getstockdatabt.Enabled = false;
+            this.getstockdatabt.Location = new System.Drawing.Point(19, 73);
+            this.getstockdatabt.Name = "getstockdatabt";
+            this.getstockdatabt.Size = new System.Drawing.Size(136, 23);
+            this.getstockdatabt.TabIndex = 12;
+            this.getstockdatabt.Text = "下载自选股历史数据";
+            this.getstockdatabt.UseVisualStyleBackColor = true;
+            this.getstockdatabt.Click += new System.EventHandler(this.getstockdatabt_Click);
             // 
             // DeleteStockbt
             // 
-            this.DeleteStockbt.Location = new System.Drawing.Point(98, 38);
-            this.DeleteStockbt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DeleteStockbt.Location = new System.Drawing.Point(99, 38);
+            this.DeleteStockbt.Margin = new System.Windows.Forms.Padding(2);
             this.DeleteStockbt.Name = "DeleteStockbt";
             this.DeleteStockbt.Size = new System.Drawing.Size(56, 23);
             this.DeleteStockbt.TabIndex = 11;
@@ -277,8 +278,8 @@
             // 
             // AddStockbt
             // 
-            this.AddStockbt.Location = new System.Drawing.Point(22, 38);
-            this.AddStockbt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.AddStockbt.Location = new System.Drawing.Point(19, 38);
+            this.AddStockbt.Margin = new System.Windows.Forms.Padding(2);
             this.AddStockbt.Name = "AddStockbt";
             this.AddStockbt.Size = new System.Drawing.Size(56, 23);
             this.AddStockbt.TabIndex = 10;
@@ -289,10 +290,11 @@
             // stockntb
             // 
             this.stockntb.Location = new System.Drawing.Point(81, 8);
-            this.stockntb.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.stockntb.Margin = new System.Windows.Forms.Padding(2);
             this.stockntb.Name = "stockntb";
             this.stockntb.Size = new System.Drawing.Size(74, 21);
             this.stockntb.TabIndex = 9;
+            this.stockntb.TextChanged += new System.EventHandler(this.stockntb_TextChanged);
             // 
             // label2
             // 
@@ -307,9 +309,9 @@
             // 
             this.optionallist.ItemHeight = 12;
             this.optionallist.Location = new System.Drawing.Point(8, 18);
-            this.optionallist.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.optionallist.Margin = new System.Windows.Forms.Padding(2);
             this.optionallist.Name = "optionallist";
-            this.optionallist.Size = new System.Drawing.Size(178, 316);
+            this.optionallist.Size = new System.Drawing.Size(178, 256);
             this.optionallist.Sorted = true;
             this.optionallist.TabIndex = 13;
             this.optionallist.SelectedIndexChanged += new System.EventHandler(this.optionallist_SelectedIndexChanged);
@@ -319,11 +321,11 @@
             this.groupBox3.Controls.Add(this.Market_comboB);
             this.groupBox3.Controls.Add(this.groupBox1);
             this.groupBox3.Controls.Add(this.SH000001pB);
-            this.groupBox3.Location = new System.Drawing.Point(206, 7);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Location = new System.Drawing.Point(200, 27);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox3.Size = new System.Drawing.Size(621, 501);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox3.Size = new System.Drawing.Size(656, 441);
             this.groupBox3.TabIndex = 17;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "行情";
@@ -338,8 +340,8 @@
             "日K",
             "周K",
             "月K"});
-            this.Market_comboB.Location = new System.Drawing.Point(530, 10);
-            this.Market_comboB.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Market_comboB.Location = new System.Drawing.Point(22, 18);
+            this.Market_comboB.Margin = new System.Windows.Forms.Padding(2);
             this.Market_comboB.Name = "Market_comboB";
             this.Market_comboB.Size = new System.Drawing.Size(66, 20);
             this.Market_comboB.TabIndex = 12;
@@ -348,36 +350,32 @@
             // SH000001pB
             // 
             this.SH000001pB.ImageLocation = "";
-            this.SH000001pB.Location = new System.Drawing.Point(21, 34);
-            this.SH000001pB.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.SH000001pB.Location = new System.Drawing.Point(28, 40);
+            this.SH000001pB.Margin = new System.Windows.Forms.Padding(2);
             this.SH000001pB.Name = "SH000001pB";
             this.SH000001pB.Size = new System.Drawing.Size(596, 259);
             this.SH000001pB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.SH000001pB.TabIndex = 11;
             this.SH000001pB.TabStop = false;
             // 
-            // stockdataSet
-            // 
-            this.stockdataSet.DataSetName = "NewDataSet";
-            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.stockinfo_tab);
-            this.panel2.Location = new System.Drawing.Point(6, 9);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Location = new System.Drawing.Point(0, 29);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(196, 499);
+            this.panel2.Size = new System.Drawing.Size(196, 439);
             this.panel2.TabIndex = 18;
             // 
             // stockinfo_tab
             // 
             this.stockinfo_tab.Controls.Add(this.stockbasictab);
             this.stockinfo_tab.Controls.Add(this.stockmarkettab);
-            this.stockinfo_tab.Location = new System.Drawing.Point(2, 2);
-            this.stockinfo_tab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.stockinfo_tab.Location = new System.Drawing.Point(5, 2);
+            this.stockinfo_tab.Margin = new System.Windows.Forms.Padding(2);
             this.stockinfo_tab.Name = "stockinfo_tab";
             this.stockinfo_tab.SelectedIndex = 0;
-            this.stockinfo_tab.Size = new System.Drawing.Size(191, 495);
+            this.stockinfo_tab.Size = new System.Drawing.Size(189, 346);
             this.stockinfo_tab.TabIndex = 15;
             // 
             // stockbasictab
@@ -408,10 +406,10 @@
             this.stockbasictab.Controls.Add(this.stockname_l);
             this.stockbasictab.Controls.Add(this.label4);
             this.stockbasictab.Location = new System.Drawing.Point(4, 22);
-            this.stockbasictab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.stockbasictab.Margin = new System.Windows.Forms.Padding(2);
             this.stockbasictab.Name = "stockbasictab";
-            this.stockbasictab.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.stockbasictab.Size = new System.Drawing.Size(183, 469);
+            this.stockbasictab.Padding = new System.Windows.Forms.Padding(2);
+            this.stockbasictab.Size = new System.Drawing.Size(181, 320);
             this.stockbasictab.TabIndex = 0;
             this.stockbasictab.Text = "基本信息";
             this.stockbasictab.UseVisualStyleBackColor = true;
@@ -439,7 +437,7 @@
             // 
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("宋体", 9F);
-            this.label25.Location = new System.Drawing.Point(87, 70);
+            this.label25.Location = new System.Drawing.Point(89, 70);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(11, 12);
             this.label25.TabIndex = 37;
@@ -667,10 +665,10 @@
             // 
             this.stockmarkettab.Controls.Add(this.groupBox4);
             this.stockmarkettab.Location = new System.Drawing.Point(4, 22);
-            this.stockmarkettab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.stockmarkettab.Margin = new System.Windows.Forms.Padding(2);
             this.stockmarkettab.Name = "stockmarkettab";
-            this.stockmarkettab.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.stockmarkettab.Size = new System.Drawing.Size(183, 402);
+            this.stockmarkettab.Padding = new System.Windows.Forms.Padding(2);
+            this.stockmarkettab.Size = new System.Drawing.Size(181, 320);
             this.stockmarkettab.TabIndex = 1;
             this.stockmarkettab.Text = "盘口";
             this.stockmarkettab.UseVisualStyleBackColor = true;
@@ -710,10 +708,10 @@
             this.groupBox4.Controls.Add(this.label9);
             this.groupBox4.Controls.Add(this.label8);
             this.groupBox4.Location = new System.Drawing.Point(2, 2);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox4.Size = new System.Drawing.Size(181, 265);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox4.Size = new System.Drawing.Size(177, 265);
             this.groupBox4.TabIndex = 0;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "五档";
@@ -1058,18 +1056,108 @@
             this.stock_t.Interval = 3000;
             this.stock_t.Tick += new System.EventHandler(this.stock_t_Tick);
             // 
+            // toolStrip
+            // 
+            this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.systemDDB,
+            this.desitionmakeDDB,
+            this.helpDDButton});
+            this.toolStrip.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip.Name = "toolStrip";
+            this.toolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip.Size = new System.Drawing.Size(1063, 25);
+            this.toolStrip.TabIndex = 19;
+            this.toolStrip.Text = "toolStrip1";
+            // 
+            // systemDDB
+            // 
+            this.systemDDB.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.systemDDB.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.系统参数ToolStripMenuItem});
+            this.systemDDB.Image = ((System.Drawing.Image)(resources.GetObject("systemDDB.Image")));
+            this.systemDDB.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.systemDDB.Name = "systemDDB";
+            this.systemDDB.Size = new System.Drawing.Size(45, 22);
+            this.systemDDB.Text = "系统";
+            // 
+            // 系统参数ToolStripMenuItem
+            // 
+            this.系统参数ToolStripMenuItem.Name = "系统参数ToolStripMenuItem";
+            this.系统参数ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.系统参数ToolStripMenuItem.Text = "系统参数";
+            // 
+            // desitionmakeDDB
+            // 
+            this.desitionmakeDDB.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.desitionmakeDDB.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AdvDMMenuItem});
+            this.desitionmakeDDB.Image = ((System.Drawing.Image)(resources.GetObject("desitionmakeDDB.Image")));
+            this.desitionmakeDDB.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.desitionmakeDDB.Name = "desitionmakeDDB";
+            this.desitionmakeDDB.Size = new System.Drawing.Size(45, 22);
+            this.desitionmakeDDB.Text = "决策";
+            // 
+            // AdvDMMenuItem
+            // 
+            this.AdvDMMenuItem.Name = "AdvDMMenuItem";
+            this.AdvDMMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.AdvDMMenuItem.Text = "高级决策";
+            this.AdvDMMenuItem.Click += new System.EventHandler(this.AdvDMMenuItem_Click);
+            // 
+            // helpDDButton
+            // 
+            this.helpDDButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.helpDDButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.关于ToolStripMenuItem});
+            this.helpDDButton.Image = ((System.Drawing.Image)(resources.GetObject("helpDDButton.Image")));
+            this.helpDDButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.helpDDButton.Name = "helpDDButton";
+            this.helpDDButton.Size = new System.Drawing.Size(45, 22);
+            this.helpDDButton.Text = "帮助";
+            // 
+            // 关于ToolStripMenuItem
+            // 
+            this.关于ToolStripMenuItem.Name = "关于ToolStripMenuItem";
+            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.关于ToolStripMenuItem.Text = "关于";
+            this.关于ToolStripMenuItem.Click += new System.EventHandler(this.关于ToolStripMenuItem_Click);
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStatusl,
+            this.toolProgressBar});
+            this.statusStrip.Location = new System.Drawing.Point(0, 474);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(1063, 22);
+            this.statusStrip.TabIndex = 20;
+            this.statusStrip.Text = "statusStrip1";
+            // 
+            // toolStatusl
+            // 
+            this.toolStatusl.Name = "toolStatusl";
+            this.toolStatusl.Size = new System.Drawing.Size(0, 17);
+            // 
+            // toolProgressBar
+            // 
+            this.toolProgressBar.Name = "toolProgressBar";
+            this.toolProgressBar.Size = new System.Drawing.Size(100, 16);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1025, 512);
+            this.ClientSize = new System.Drawing.Size(1063, 496);
+            this.Controls.Add(this.statusStrip);
+            this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
-            this.Text = "MarketInfoV0.3.0";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "MarketInfo";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -1078,7 +1166,6 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SH000001pB)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.stockdataSet)).EndInit();
             this.panel2.ResumeLayout(false);
             this.stockinfo_tab.ResumeLayout(false);
             this.stockbasictab.ResumeLayout(false);
@@ -1086,7 +1173,12 @@
             this.stockmarkettab.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.toolStrip.ResumeLayout(false);
+            this.toolStrip.PerformLayout();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1110,9 +1202,6 @@
         private System.Windows.Forms.Button DeleteStockbt;
         private System.Windows.Forms.Button AddStockbt;
         private System.Windows.Forms.TextBox stockntb;
-        private System.Data.DataSet stockdataSet;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TabControl stockinfo_tab;
         private System.Windows.Forms.TabPage stockbasictab;
@@ -1177,6 +1266,17 @@
         private System.Windows.Forms.Label time_l;
         private System.Windows.Forms.Button openfilebt;
         private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.ToolStrip toolStrip;
+        private System.Windows.Forms.ToolStripDropDownButton helpDDButton;
+        private System.Windows.Forms.ToolStripMenuItem 关于ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripDropDownButton desitionmakeDDB;
+        private System.Windows.Forms.ToolStripMenuItem AdvDMMenuItem;
+        private System.Windows.Forms.Button getstockdatabt;
+        private System.Windows.Forms.ToolStripDropDownButton systemDDB;
+        private System.Windows.Forms.ToolStripMenuItem 系统参数ToolStripMenuItem;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel toolStatusl;
+        private System.Windows.Forms.ToolStripProgressBar toolProgressBar;
     }
 }
 

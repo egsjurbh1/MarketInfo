@@ -13,28 +13,16 @@ namespace MarketInfo
 {
     public partial class MainForm : Form
     {
+        
+
         public MainForm()
         {
             InitializeComponent();
             Init_ReadConfigFile();
             ReadOptionalStockFile();
         }
-        //全局变量
-        public class CfgStruct
-        {
-            public static int time;
-            public static String stockcur;
-            public static String stockurl;
-            public static int stock_n;
-            public static String fileName;
-            public static String stockfileName;
-            public static String market_timeline;
-            public static String marketlist_t;
-            public static String market_dailyk;
-            public static String market_weekk;
-            public static String market_monthk;
-            public static List<string> lns = new List<string>();//声明一个泛型
-        }
+        
+        #region 初始化和配置
         //读app.config配置
         private void Init_ReadConfigFile()
         {
@@ -45,6 +33,8 @@ namespace MarketInfo
             CfgStruct.market_dailyk = ConfigurationSettings.AppSettings["Marketdailyk_Sina"];
             CfgStruct.market_weekk = ConfigurationSettings.AppSettings["Marketweekk_Sina"];
             CfgStruct.market_monthk = ConfigurationSettings.AppSettings["Marketmonthk_Sina"];
+            CfgStruct.market_daily_his_url = ConfigurationSettings.AppSettings["Market_daily_his_yahoo"];
+            CfgStruct.hisdatafilepath = Directory.GetCurrentDirectory() + ConfigurationSettings.AppSettings["StockHisDataFilePath"];
             stockname_l.Visible = false;
             stockprice_l.Visible = false;
             updownpercent_l.Visible = false;
@@ -57,7 +47,10 @@ namespace MarketInfo
             pbratio_l.Visible = false;
             peratio_l.Visible = false;
             turnoverrate_l.Visible = false;
+            toolProgressBar.Visible = false;
+            
         }
+
         //读Stock自选文件
         private void ReadOptionalStockFile()
         {
@@ -74,7 +67,7 @@ namespace MarketInfo
                 myFs.Close();
             }
             StreamReader sw = new StreamReader(filepath, true);
-
+            
             while (sw.Peek() >= 0)
             {
                 stock = sw.ReadLine();
@@ -87,9 +80,7 @@ namespace MarketInfo
         //及时杀死网关超时的webclient
         public class CNNWebClient : WebClient
         {
-
             private int _timeOut = 10;
-
             /**/
             /// <summary>
             /// 过期时间
@@ -122,6 +113,9 @@ namespace MarketInfo
                 return request;
             }
         }
+        #endregion
+
+        #region 抓实时数据模块
         //抓数据
         private void interval_Tick(object sender, EventArgs e)
         {
@@ -155,17 +149,16 @@ namespace MarketInfo
             }
             sw.Close();
             //状态显示
-            listBox1.Items.Add(DateTime.Now.ToString() + "  " + CfgStruct.time.ToString());// = CfgStruct.time.ToString();
-
-            }
-
+            toolStatusl.Text = "抓取数据中…" + DateTime.Now.ToString() + "  " + CfgStruct.time.ToString();
+        }
+        //停止
         private void button2_Click(object sender, EventArgs e)
         {
             textBox1.ReadOnly = false;
             interval.Dispose();
+            toolStatusl.Text = "";
         }
-
-
+        //设定时间间隔
         private void button4_Click(object sender, EventArgs e)
         {
             if (textBox1.Text.Trim() != String.Empty)
@@ -173,7 +166,11 @@ namespace MarketInfo
             else
                 MessageBox.Show("请设定时间间隔.");
         }
-
+        //打开文件
+        private void openfilebt_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(CfgStruct.fileName);
+        }
         //清空文件
         private void ClearFileBt_Click(object sender, EventArgs e)
         {
@@ -181,10 +178,11 @@ namespace MarketInfo
            
             //清空行情文件
             File.WriteAllText(filepath, "");
-            listBox1.Items.Clear();//清空初始化
             CfgStruct.time = 0;
         }
+        #endregion
 
+        #region 自选模块
         //增加
         private void AddStockbt_Click(object sender, EventArgs e)
         {
@@ -230,7 +228,7 @@ namespace MarketInfo
             string stock;
             ReadOptionalStockFile();
             //指定要删除的行
-            stock = stockntb.Text;
+            stock = CfgStruct.stockcur;
             CfgStruct.lns.Remove(stock);
             File.WriteAllText(CfgStruct.stockfileName, "");
             //写回
@@ -243,19 +241,106 @@ namespace MarketInfo
             ReadOptionalStockFile();
         }
 
+        //取自选股历史数据
+        private void getstockdatabt_Click(object sender, EventArgs e)
+        {
+            string url = "";
+            string filepath = CfgStruct.hisdatafilepath;
+            string newfilename = "";
+            bool isExist = false;
+            toolStatusl.Visible = true;
+            toolStatusl.Text = "连接服务器……";
+            //读最新文件
+            ReadOptionalStockFile();
+            if (CfgStruct.lns.Count == 0)
+            {
+                toolStatusl.Text = "";
+                MessageBox.Show("自选表中没有股票.");
+            }
+            StringBuilder sburl = new StringBuilder(CfgStruct.market_daily_his_url);
+
+            foreach (string stock in CfgStruct.lns)
+            {
+                GeneralClass gc = new GeneralClass();
+                sburl.Append(stock);
+                newfilename = "\\" + stock + ".csv";
+                int i = gc.stock_markettype(stock);
+                switch (i)
+                {
+                    case 1:
+                        sburl.Append(".ss");
+                        break;
+                    case 2:
+                        sburl.Append(".sz");
+                        break;
+                    default:
+                        MessageBox.Show("股票代码不正确！");
+                        break;
+                }
+                url = sburl.ToString();
+                toolStatusl.Text = "下载" + stock + "数据";
+                if (!gc.DownloadFile(url, filepath))
+                {
+                    MessageBox.Show(stock + "下载失败");
+                    continue;
+                }
+                //修改文件名
+                isExist = File.Exists(Directory.GetCurrentDirectory() + newfilename);
+                if (!isExist)
+                    File.Copy(filepath, Directory.GetCurrentDirectory() + newfilename);
+                toolStatusl.Text = "完成";
+            }
+            MessageBox.Show("下载自选股历史数据结束.");
+        }
+
+        //股票输入框检验
+        private void stockntb_TextChanged(object sender, EventArgs e)
+        {
+            GeneralClass gc = new GeneralClass();
+
+            if (!gc.IsInt(stockntb.Text))
+            {
+                MessageBox.Show("应该是一个数字", "数据输入错误提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                stockntb.SelectAll();
+                stockntb.Focus();
+                return;
+            }
+        }
+
+        #endregion
+
+        #region 单股实时行情获取
+        static bool IsStockOk = false;
         //双击选中
         private void optionallist_SelectedIndexChanged(object sender, EventArgs e)
         {
             stock_t.Interval = 1000;    //更新周期 1秒
-            CfgStruct.stockcur = optionallist.Text;
-            Market_comboB.Enabled = true;
+            string stockget = optionallist.Text;
+            GeneralClass gc = new GeneralClass();
+            //检验股票代码是否正确
+            if (gc.stock_markettype(stockget) == 1 || gc.stock_markettype(stockget) == 2)
+            {
+                CfgStruct.stockcur = stockget;
+                IsStockOk = true;
+            }
+            else
+            {
+                MessageBox.Show("股票代码不正确，请删除.");
+                CfgStruct.stockcur = stockget;
+                IsStockOk = false;
+            }
 
-            //解析
-            stock_appendurl(CfgStruct.stockcur, ref CfgStruct.stockurl, CfgStruct.market_timeline, true);
-            Market_comboB.SelectedItem = "分时";
+            if (IsStockOk)
+            {
+                Market_comboB.Enabled = true;
 
-            stockntb.Text = optionallist.Text;
-            stock_t_Tick(sender, e);
+                //解析
+                stock_appendurl(CfgStruct.stockcur, ref CfgStruct.stockurl, CfgStruct.market_timeline, true);
+                Market_comboB.SelectedItem = "分时";
+
+                stockntb.Text = optionallist.Text;
+                stock_t_Tick(sender, e);
+            }
         }
 
         //定时器：更新指定股票数据
@@ -269,25 +354,28 @@ namespace MarketInfo
             time_l.Text = DateTime.Now.ToString();
         }
 
-        //解析拼接股票URL
+        //拼接股票URL
         private void stock_appendurl(string stock, ref string stockurl, string url, bool ispicture)
         {
+            GeneralClass gc = new GeneralClass();
             string head = stock.Substring(0, 2);
 
+            int i = gc.stock_markettype(stock);
+
             StringBuilder s = new StringBuilder(url);
-            if (head == "60")    //上海
-                s.Append("sh");
-            else if (head == "00" || head == "30")  //深证
+            switch (i)
             {
-                if (stock != "000001")
-                    s.Append("sz");
-                else
+                case 1: //上海
                     s.Append("sh");
+                    break;
+                case 2: //深证
+                    s.Append("sz");
+                    break;
+                default:
+                    return;
+                    break;
             }
-            else if (stock == "399001")
-                s.Append("sz");
-            else
-                throw new Exception("股票代码不正确！");
+                
             s.Append(stock);
             if(ispicture)
                 s.Append(".gif");
@@ -295,7 +383,7 @@ namespace MarketInfo
             stockurl = s.ToString();
         }
         
-        //获取单支股票行情 输入股票代码stock
+        //获取单支股票行情
         private void stockmarket_one(string stock, ref string stockdata)
         {         
             string stockurl = "";
@@ -320,10 +408,6 @@ namespace MarketInfo
         private void Market_comboB_SelectedIndexChanged(object sender, EventArgs e)
         {
             string stock = "";
-            string stock_timeline_url = "";
-            string stock_dailyk_url = "";
-            string stock_weekk_url = "";
-            string stock_monthk_url = "";
 
             stock = CfgStruct.stockcur;
             switch (Market_comboB.SelectedItem.ToString())
@@ -513,11 +597,24 @@ namespace MarketInfo
                 ++i;
             }
         }
-        //打开文件
-        private void openfilebt_Click(object sender, EventArgs e)
+        #endregion
+
+        #region 关于
+        private void 关于ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(CfgStruct.fileName);
+            (new AboutForm()).ShowDialog();
         }
+
+
+        #endregion
+
+        #region 决策
+        private void AdvDMMenuItem_Click(object sender, EventArgs e)
+        {
+            AdvancedDMForm admf = new AdvancedDMForm();
+            admf.Show();
+        }
+        #endregion
     }
 
 
