@@ -164,7 +164,6 @@ namespace MarketInfo
             DataTable dt = new DataTable();
             FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
 
-            //StreamReader sr = new StreamReader(fs, Encoding.UTF8);
             StreamReader sr = new StreamReader(fs);
             //记录每次读取的一行记录
             string strLine = "";
@@ -187,8 +186,28 @@ namespace MarketInfo
                     //创建列
                     for (int i = 0; i < columnCount; i++)
                     {
-                        DataColumn dc = new DataColumn(tableHead[i]);
-                        dt.Columns.Add(dc);
+                        //格式转换
+                        switch (i)
+                        {
+                            case 0:
+                                DataColumn dc0 = new DataColumn(tableHead[i]);
+                                dt.Columns.Add(dc0);
+                                break;
+                            case 5:
+                                DataColumn dc1 = new DataColumn(tableHead[i]);
+                                dt.Columns.Add(dc1.ToString(), typeof(int));
+                                break;
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 4:
+                            case 6:
+                                DataColumn dc2 = new DataColumn(tableHead[i]);
+                                dt.Columns.Add(dc2.ToString(), typeof(float));
+                                break;
+                            default:
+                                break;
+                        }
                     }
                 }
                 else
@@ -197,6 +216,22 @@ namespace MarketInfo
                     DataRow dr = dt.NewRow();
                     for (int j = 0; j < columnCount; j++)
                     {
+                        //格式转换
+                        switch (j)
+                        {
+                            case 5:
+                                dr[j] = int.Parse(aryLine[j]);
+                                break;
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 4:
+                            case 6:
+                                dr[j] = float.Parse(aryLine[j]);
+                                break;
+                            default:
+                                break;
+                        }
                         dr[j] = aryLine[j];
                     }
                     dt.Rows.Add(dr);

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
 using System.IO;
+using System.Globalization;
 
 namespace MarketInfo
 {
@@ -23,13 +24,21 @@ namespace MarketInfo
             Init();
         }
 
-        //System Initial 
+        /// <summary>
+        /// System Initial 
+        /// </summary>
         private void Init()
         {
             stock = "0";
+            currentstockl.Text = "";
+            result_dgv.Visible = false;
         }
 
-        //Get stock code 
+        /// <summary>
+        /// Get stock code 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void okbutton_Click(object sender, EventArgs e)
         {
             GeneralClass gc = new GeneralClass();
@@ -39,12 +48,17 @@ namespace MarketInfo
             {
                 stock = stockget;
                 statusl.Text = stock + " Get";
+                currentstockl.Text = stock;
             }
             else
                 MessageBox.Show("Error: " + stockget + " is not a stock code.");
         }
 
-        //Download daliy history data
+        /// <summary>
+        /// Download daliy history data
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void getstockdatabt_Click(object sender, EventArgs e)
         {
             GeneralClass gc = new GeneralClass();
@@ -80,16 +94,18 @@ namespace MarketInfo
                     MessageBox.Show(stock + " Download Error!");
                 else
                 {
-                    //修改文件名
-                    bool isExist = File.Exists(Directory.GetCurrentDirectory() + newfilename);
-                    if (!isExist)
-                        File.Copy(filepath, Directory.GetCurrentDirectory() + newfilename);
+                    //每次下载覆盖
+                    File.Copy(filepath, Directory.GetCurrentDirectory() + newfilename, true);
                     statusl.Text = "Download " + stock + ".csv" + " Successed";
                 }
             }
         }
 
-        //Textbox real-time dectction
+        /// <summary>
+        /// Textbox real-time dectction
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void stockntb_TextChanged(object sender, EventArgs e)
         {
             GeneralClass gc = new GeneralClass();
@@ -103,7 +119,11 @@ namespace MarketInfo
             }
         }
 
-        //open history data file
+        /// <summary>
+        /// open history data file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void openhisdata_bt_Click(object sender, EventArgs e)
         {
             string filepath = Directory.GetCurrentDirectory() + "\\" + stock + ".csv";
@@ -113,7 +133,11 @@ namespace MarketInfo
                 MessageBox.Show("File " + stock + ".csv" + " not exist.");
         }
 
-        //Delete history file
+        /// <summary>
+        /// Delete history file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void deletehisfile_bt_Click(object sender, EventArgs e)
         {
             string filepath = Directory.GetCurrentDirectory() + "\\" + stock + ".csv";
@@ -125,8 +149,11 @@ namespace MarketInfo
             else
                 MessageBox.Show("File " + stock + ".csv" + " not exist.");
         }
-
-        //Import data to DataTable
+        /// <summary>
+        /// Import data to DataTable
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void importdatabt_Click(object sender, EventArgs e)
         {
             GeneralClass gc = new GeneralClass();
@@ -141,10 +168,40 @@ namespace MarketInfo
                 dataGridView.Visible = true;
                 dataGridView.DataSource = stockdata;
                 dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;    //auto columns width
-                
+                DatagBox.Text = "Data: " + stock;
+                go_bt.Enabled = true;
             }
             else
                 MessageBox.Show("File " + stock + ".csv" + " not exist.");
+        }
+        /// <summary>
+        /// go and analysis
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void go_bt_Click(object sender, EventArgs e)
+        {
+            TradStrategy ts = new TradStrategy();
+            //creat datatable
+            DataTable result_dt = new DataTable();
+            DataColumn avgprice_dc = new DataColumn("avgprice");
+
+            result_dt.Columns.Add(avgprice_dc);
+
+            //stock_trend analysis
+            DateTime begintime = begintime_dtp.Value;
+            DateTime endtime = endtime_dtp.Value;
+            ts.stock_trend(begintime, endtime, stockdata);
+
+            //Add datarow
+            DataRow workrow = result_dt.NewRow();
+            workrow["avgprice"] = Stock_AnalysisIndex.win_avgprice;
+            result_dt.Rows.Add(workrow);
+            //Show
+            result_dgv.Visible = true;
+            result_dgv.DataSource = result_dt;
+            result_dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;    //auto columns width
+            statusl.Text = "Compute Success!";
         }
     }
 }

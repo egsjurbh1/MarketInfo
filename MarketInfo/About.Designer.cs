@@ -35,9 +35,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.SureBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -95,7 +95,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(79, 17);
             this.label7.TabIndex = 3;
-            this.label7.Text = "Build141212";
+            this.label7.Text = "Build141217";
             // 
             // label6
             // 
@@ -125,7 +125,17 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(83, 17);
             this.label3.TabIndex = 0;
-            this.label3.Text = "Version 0.4.2";
+            this.label3.Text = "Version 0.4.5";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.Location = new System.Drawing.Point(27, 52);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(178, 17);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "2、高级数据分析；(v0.4及以上)";
             // 
             // SureBtn
             // 
@@ -145,16 +155,6 @@
             this.label2.Size = new System.Drawing.Size(107, 17);
             this.label2.TabIndex = 1;
             this.label2.Text = "1、A股行情查询；";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.Location = new System.Drawing.Point(27, 52);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(178, 17);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "2、高级数据分析；(v0.4及以上)";
             // 
             // AboutForm
             // 
