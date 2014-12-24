@@ -191,7 +191,7 @@ namespace MarketInfo
                         {
                             case 0:
                                 DataColumn dc0 = new DataColumn(tableHead[i]);
-                                dt.Columns.Add(dc0);
+                                dt.Columns.Add(dc0.ToString(), typeof(string));
                                 break;
                             case 5:
                                 DataColumn dc1 = new DataColumn(tableHead[i]);
@@ -219,6 +219,10 @@ namespace MarketInfo
                         //格式转换
                         switch (j)
                         {
+                            case 0:
+                                aryLine[j] = aryLine[j].Replace("-", "");//去除日期串中的‘-’
+                                dr[j] = int.Parse(aryLine[j]);//转整型
+                                break;
                             case 5:
                                 dr[j] = int.Parse(aryLine[j]);
                                 break;

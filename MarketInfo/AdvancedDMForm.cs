@@ -32,6 +32,8 @@ namespace MarketInfo
             stock = "0";
             currentstockl.Text = "";
             result_dgv.Visible = false;
+            flashpoint_dgv.Visible = false;
+            flashlight_l.Visible = false;
         }
 
         /// <summary>
@@ -184,24 +186,66 @@ namespace MarketInfo
             TradStrategy ts = new TradStrategy();
             //creat datatable
             DataTable result_dt = new DataTable();
-            DataColumn avgprice_dc = new DataColumn("avgprice");
-
+            DataTable flashlight_dt = new DataTable();
+            //table columns
+            DataColumn avgprice_dc = new DataColumn("Avg(P)");
             result_dt.Columns.Add(avgprice_dc);
+            DataColumn sdevprice_dc = new DataColumn("Sdev(P)");
+            result_dt.Columns.Add(sdevprice_dc);
+            DataColumn sdevratioprice_dc = new DataColumn("CV(P)%");
+            result_dt.Columns.Add(sdevratioprice_dc);
+            DataColumn avgvolume_dc = new DataColumn("Avg(V)");
+            result_dt.Columns.Add(avgvolume_dc);
+            DataColumn sdevvolume_dc = new DataColumn("Sdev(V)");
+            result_dt.Columns.Add(sdevvolume_dc);
+            DataColumn sdevratiovolume_dc = new DataColumn("CV(V)%");
+            result_dt.Columns.Add(sdevratiovolume_dc);
+            DataColumn prate_dc = new DataColumn("GrowthRatio%");
+            result_dt.Columns.Add(prate_dc);
 
             //stock_trend analysis
             DateTime begintime = begintime_dtp.Value;
             DateTime endtime = endtime_dtp.Value;
-            ts.stock_trend(begintime, endtime, stockdata);
+            try
+            {
+                Stock_Index.para_volumeratio = float.Parse(volumeratio_tb.Text);
+            }
+            catch
+            {
+
+            }
+            ts.stockdata_analysis(begintime, endtime, stockdata, ref flashlight_dt);
 
             //Add datarow
             DataRow workrow = result_dt.NewRow();
-            workrow["avgprice"] = Stock_AnalysisIndex.win_avgprice;
+            workrow[avgprice_dc] = Stock_Index.win_avgprice.ToString("f2");
+            workrow[avgvolume_dc] = Stock_Index.win_avgvolume / 100;
+            workrow[prate_dc] = (Stock_Index.win_prate * 100).ToString("f2");
+            workrow[sdevprice_dc] = Stock_Index.win_sdevprice.ToString("f2");
+            workrow[sdevvolume_dc] = Stock_Index.win_sdevvolume / 100;
+            workrow[sdevratioprice_dc] = (Stock_Index.win_sdevprice / Stock_Index.win_avgprice * 100).ToString("f2");
+            workrow[sdevratiovolume_dc] = (Stock_Index.win_sdevvolume / Stock_Index.win_avgvolume * 100).ToString("f2");
             result_dt.Rows.Add(workrow);
-            //Show
+
+            //Show results
             result_dgv.Visible = true;
             result_dgv.DataSource = result_dt;
             result_dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;    //auto columns width
+            //Show flashpoint
+            if (flashlight_dt.Rows.Count != 0)
+            {
+                flashlight_l.Visible = false;
+                flashpoint_dgv.Visible = true;
+                flashpoint_dgv.DataSource = flashlight_dt;
+                flashpoint_dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            }
+            else
+            {
+                flashpoint_dgv.Visible = false;
+                flashlight_l.Visible = true;
+            }
             statusl.Text = "Compute Success!";
+
         }
     }
 }

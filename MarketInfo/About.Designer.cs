@@ -95,7 +95,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(79, 17);
             this.label7.TabIndex = 3;
-            this.label7.Text = "Build141217";
+            this.label7.Text = "Build141218";
             // 
             // label6
             // 
@@ -125,7 +125,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(83, 17);
             this.label3.TabIndex = 0;
-            this.label3.Text = "Version 0.4.5";
+            this.label3.Text = "Version 0.5.0";
             // 
             // label5
             // 
@@ -133,9 +133,9 @@
             this.label5.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label5.Location = new System.Drawing.Point(27, 52);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(178, 17);
+            this.label5.Size = new System.Drawing.Size(111, 17);
             this.label5.TabIndex = 3;
-            this.label5.Text = "2、高级数据分析；(v0.4及以上)";
+            this.label5.Text = "2、个股数据分析；";
             // 
             // SureBtn
             // 

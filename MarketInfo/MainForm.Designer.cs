@@ -1100,7 +1100,7 @@
             // AdvDMMenuItem
             // 
             this.AdvDMMenuItem.Name = "AdvDMMenuItem";
-            this.AdvDMMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.AdvDMMenuItem.Size = new System.Drawing.Size(124, 22);
             this.AdvDMMenuItem.Text = "高级决策";
             this.AdvDMMenuItem.Click += new System.EventHandler(this.AdvDMMenuItem_Click);
             // 
@@ -1155,6 +1155,7 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MarketInfo";
