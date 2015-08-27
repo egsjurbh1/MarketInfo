@@ -1,19 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
+using System.Windows.Forms;
 
 namespace MarketInfo
 {
     /// <summary>
-    /// 基础数据类
+    /// 个股基础数据类
     /// </summary>
     public class Stock_Index
     {
         /// <summary>
-        /// 基础数据
+        /// 个股信息
+        /// </summary>
+        public string stockname;        //名称
+        public int market;              //市场
+        /// <summary>
+        /// 量价数据
         /// </summary>
         public static double stock_curprice;    //当前股价
         public static int stock_volume;         //成交量
@@ -42,7 +45,8 @@ namespace MarketInfo
         public static float win_sdevprice;      //窗口价格标准差
         public static long win_avgvolume;       //窗口均量
         public static float win_sdevvolume;     //窗口量标准差
-        public static float win_prate;          //窗口增长率
+        public static float win_prate;          //窗口增长率（相对均价）
+        public static float win_aprate;         //窗口绝对增长率
         public static float trend_degree;       //趋势度
         /// <summary>
         /// 公式参数
@@ -71,32 +75,46 @@ namespace MarketInfo
             string begintime = begin_time.ToString("yyyyMMdd");
             string endtime = end_time.ToString("yyyyMMdd");
 
-            string avgs_filters = "Date >= " + begintime + " AND " + "Date <= " + endtime;//区间条件
-            //区间均价
-            object avgstockprice = stock_dt.Compute("Avg([Adj Close])", avgs_filters);
-            Stock_Index.win_avgprice = float.Parse(avgstockprice.ToString());
-            //区间均量
-            object avgstockvolume = stock_dt.Compute("Avg([Volume])", avgs_filters);
-            Stock_Index.win_avgvolume = long.Parse(avgstockvolume.ToString());
-            //区间股价标准差
-            object sdev_price = stock_dt.Compute("StDev([Adj Close])", avgs_filters);
-            Stock_Index.win_sdevprice = float.Parse(sdev_price.ToString());
-            //区间量标准差
-            object sdev_volume = stock_dt.Compute("StDev([Volume])", avgs_filters);
-            Stock_Index.win_sdevvolume = float.Parse(sdev_volume.ToString());
-            //区间增长率
-            DataRow[] dr;
-            string sortOrder = "Date DESC";
-            dr = stock_dt.Select(avgs_filters, sortOrder);
-            float end_price = float.Parse(dr[0].ItemArray[6].ToString());
-            Stock_Index.win_prate = (end_price - Stock_Index.win_avgprice) / Stock_Index.win_avgprice;
-            //选出暴量异常点
-            DataRow[] drf;
-            string s_winvolume = (Stock_Index.para_volumeratio * Stock_Index.win_avgvolume).ToString();
-            string flashp_filters = avgs_filters + " AND " + "Volume >= " + s_winvolume;
-            drf = stock_dt.Select(flashp_filters, sortOrder);
-            if(drf.Count() != 0)
-                flashpoint_dt = drf.CopyToDataTable();
+            //时间容错判断
+            long bt_i = long.Parse(begintime);
+            long et_i = long.Parse(endtime);
+            if ( et_i - bt_i <= 1)
+                MessageBox.Show("Error: begintime and endtime.");
+            else
+            {
+                string avgs_filters = "Date >= " + begintime + " AND " + "Date <= " + endtime;//区间条件
+                //区间均价
+                object avgstockprice = stock_dt.Compute("Avg([Adj Close])", avgs_filters);
+                Stock_Index.win_avgprice = float.Parse(avgstockprice.ToString());
+                //区间均量
+                object avgstockvolume = stock_dt.Compute("Avg([Volume])", avgs_filters);
+                Stock_Index.win_avgvolume = long.Parse(avgstockvolume.ToString());
+                //区间股价标准差
+                object sdev_price = stock_dt.Compute("StDev([Adj Close])", avgs_filters);
+                Stock_Index.win_sdevprice = float.Parse(sdev_price.ToString());
+                //区间量标准差
+                object sdev_volume = stock_dt.Compute("StDev([Volume])", avgs_filters);
+                Stock_Index.win_sdevvolume = float.Parse(sdev_volume.ToString());
+                //区间增长率
+                DataRow[] dr;
+                string sortOrder = "Date DESC";
+                dr = stock_dt.Select(avgs_filters, sortOrder);
+                float end_price = float.Parse(dr[0].ItemArray[6].ToString());
+                Stock_Index.win_prate = (end_price - Stock_Index.win_avgprice) / Stock_Index.win_avgprice;
+                //窗口绝对增长率
+                DataRow[] dra;
+                string sortOrdera = "Date ASC";
+                dr = stock_dt.Select(avgs_filters, sortOrdera);
+                float begin_price = float.Parse(dr[0].ItemArray[6].ToString());
+                Stock_Index.win_aprate = (end_price - begin_price) / begin_price;
+                //选出暴量异常点
+                DataRow[] drf;
+                string s_winvolume = (Stock_Index.para_volumeratio * Stock_Index.win_avgvolume).ToString();
+                string flashp_filters = avgs_filters + " AND " + "Volume >= " + s_winvolume;
+                drf = stock_dt.Select(flashp_filters, sortOrder);
+                if (drf.Count() != 0)
+                    flashpoint_dt = drf.CopyToDataTable();
+            }
         }
         /// <summary>
         /// 盯市

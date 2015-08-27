@@ -30,24 +30,19 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.button1 = new System.Windows.Forms.Button();
             this.interval = new System.Windows.Forms.Timer(this.components);
-            this.button2 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
-            this.ClearFileBt = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.openfilebt = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gbOptionlist = new System.Windows.Forms.GroupBox();
+            this.lbstatusdl = new System.Windows.Forms.Label();
+            this.btipdbs = new System.Windows.Forms.Button();
+            this.bt_dlstockdata = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.getstockdatabt = new System.Windows.Forms.Button();
             this.DeleteStockbt = new System.Windows.Forms.Button();
             this.AddStockbt = new System.Windows.Forms.Button();
             this.stockntb = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.optionallist = new System.Windows.Forms.ListBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lb_syssem = new System.Windows.Forms.ListBox();
             this.Market_comboB = new System.Windows.Forms.ComboBox();
             this.SH000001pB = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -115,16 +110,30 @@
             this.stock_t = new System.Windows.Forms.Timer(this.components);
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.systemDDB = new System.Windows.Forms.ToolStripDropDownButton();
-            this.系统参数ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SysSetMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.desitionmakeDDB = new System.Windows.Forms.ToolStripDropDownButton();
             this.AdvDMMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BAMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpDDButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStatusl = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolProgressBar = new System.Windows.Forms.ToolStripProgressBar();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.tstatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.openfilebt = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.ClearFileBt = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.lbusername = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cMSstock = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.TSMIAdvancedA = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMIDownloaddata = new System.Windows.Forms.ToolStripMenuItem();
+            this.gbOptionlist.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SH000001pB)).BeginInit();
@@ -135,115 +144,61 @@
             this.groupBox4.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.cMSstock.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(9, 49);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "抓取开始";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.interval_Tick);
             // 
             // interval
             // 
             this.interval.Interval = 3000;
             this.interval.Tick += new System.EventHandler(this.interval_Tick);
             // 
-            // button2
+            // gbOptionlist
             // 
-            this.button2.Location = new System.Drawing.Point(90, 49);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "抓取结束";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.gbOptionlist.Controls.Add(this.lbstatusdl);
+            this.gbOptionlist.Controls.Add(this.btipdbs);
+            this.gbOptionlist.Controls.Add(this.bt_dlstockdata);
+            this.gbOptionlist.Controls.Add(this.panel1);
+            this.gbOptionlist.Controls.Add(this.optionallist);
+            this.gbOptionlist.Location = new System.Drawing.Point(860, 27);
+            this.gbOptionlist.Margin = new System.Windows.Forms.Padding(2);
+            this.gbOptionlist.Name = "gbOptionlist";
+            this.gbOptionlist.Padding = new System.Windows.Forms.Padding(2);
+            this.gbOptionlist.Size = new System.Drawing.Size(192, 485);
+            this.gbOptionlist.TabIndex = 13;
+            this.gbOptionlist.TabStop = false;
+            this.gbOptionlist.Text = "自选";
             // 
-            // textBox1
+            // lbstatusdl
             // 
-            this.textBox1.Location = new System.Drawing.Point(86, 23);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(77, 21);
-            this.textBox1.TabIndex = 5;
+            this.lbstatusdl.AutoSize = true;
+            this.lbstatusdl.Location = new System.Drawing.Point(12, 465);
+            this.lbstatusdl.Name = "lbstatusdl";
+            this.lbstatusdl.Size = new System.Drawing.Size(47, 12);
+            this.lbstatusdl.TabIndex = 17;
+            this.lbstatusdl.Text = "label28";
             // 
-            // label1
+            // btipdbs
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 12);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "提取间隔(ms)";
+            this.btipdbs.Location = new System.Drawing.Point(8, 428);
+            this.btipdbs.Name = "btipdbs";
+            this.btipdbs.Size = new System.Drawing.Size(104, 23);
+            this.btipdbs.TabIndex = 16;
+            this.btipdbs.Text = "导入数据库";
+            this.btipdbs.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // bt_dlstockdata
             // 
-            this.button4.Location = new System.Drawing.Point(181, 19);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(51, 23);
-            this.button4.TabIndex = 7;
-            this.button4.Text = "确定";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // ClearFileBt
-            // 
-            this.ClearFileBt.Location = new System.Drawing.Point(251, 19);
-            this.ClearFileBt.Margin = new System.Windows.Forms.Padding(2);
-            this.ClearFileBt.Name = "ClearFileBt";
-            this.ClearFileBt.Size = new System.Drawing.Size(67, 23);
-            this.ClearFileBt.TabIndex = 8;
-            this.ClearFileBt.Text = "清空文件";
-            this.ClearFileBt.UseVisualStyleBackColor = true;
-            this.ClearFileBt.Click += new System.EventHandler(this.ClearFileBt_Click);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.openfilebt);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.ClearFileBt);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.button4);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Location = new System.Drawing.Point(103, 343);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(331, 89);
-            this.groupBox1.TabIndex = 9;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "信息抓取";
-            // 
-            // openfilebt
-            // 
-            this.openfilebt.Location = new System.Drawing.Point(251, 49);
-            this.openfilebt.Margin = new System.Windows.Forms.Padding(2);
-            this.openfilebt.Name = "openfilebt";
-            this.openfilebt.Size = new System.Drawing.Size(67, 23);
-            this.openfilebt.TabIndex = 17;
-            this.openfilebt.Text = "打开文件";
-            this.openfilebt.UseVisualStyleBackColor = true;
-            this.openfilebt.Click += new System.EventHandler(this.openfilebt_Click);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.panel1);
-            this.groupBox2.Controls.Add(this.optionallist);
-            this.groupBox2.Location = new System.Drawing.Point(860, 27);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(192, 441);
-            this.groupBox2.TabIndex = 13;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "自选";
+            this.bt_dlstockdata.Location = new System.Drawing.Point(8, 399);
+            this.bt_dlstockdata.Name = "bt_dlstockdata";
+            this.bt_dlstockdata.Size = new System.Drawing.Size(104, 23);
+            this.bt_dlstockdata.TabIndex = 15;
+            this.bt_dlstockdata.Text = "下载历史数据";
+            this.bt_dlstockdata.UseVisualStyleBackColor = true;
+            this.bt_dlstockdata.Click += new System.EventHandler(this.bt_dlstockdata_Click);
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.getstockdatabt);
             this.panel1.Controls.Add(this.DeleteStockbt);
             this.panel1.Controls.Add(this.AddStockbt);
             this.panel1.Controls.Add(this.stockntb);
@@ -251,19 +206,8 @@
             this.panel1.Location = new System.Drawing.Point(8, 285);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(177, 147);
+            this.panel1.Size = new System.Drawing.Size(177, 80);
             this.panel1.TabIndex = 14;
-            // 
-            // getstockdatabt
-            // 
-            this.getstockdatabt.Enabled = false;
-            this.getstockdatabt.Location = new System.Drawing.Point(19, 73);
-            this.getstockdatabt.Name = "getstockdatabt";
-            this.getstockdatabt.Size = new System.Drawing.Size(136, 23);
-            this.getstockdatabt.TabIndex = 12;
-            this.getstockdatabt.Text = "下载自选股历史数据";
-            this.getstockdatabt.UseVisualStyleBackColor = true;
-            this.getstockdatabt.Click += new System.EventHandler(this.getstockdatabt_Click);
             // 
             // DeleteStockbt
             // 
@@ -307,6 +251,7 @@
             // 
             // optionallist
             // 
+            this.optionallist.ContextMenuStrip = this.cMSstock;
             this.optionallist.ItemHeight = 12;
             this.optionallist.Location = new System.Drawing.Point(8, 18);
             this.optionallist.Margin = new System.Windows.Forms.Padding(2);
@@ -318,17 +263,26 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.lb_syssem);
             this.groupBox3.Controls.Add(this.Market_comboB);
-            this.groupBox3.Controls.Add(this.groupBox1);
             this.groupBox3.Controls.Add(this.SH000001pB);
             this.groupBox3.Location = new System.Drawing.Point(200, 27);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Size = new System.Drawing.Size(656, 441);
+            this.groupBox3.Size = new System.Drawing.Size(656, 493);
             this.groupBox3.TabIndex = 17;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "行情";
+            // 
+            // lb_syssem
+            // 
+            this.lb_syssem.FormattingEnabled = true;
+            this.lb_syssem.ItemHeight = 12;
+            this.lb_syssem.Location = new System.Drawing.Point(22, 409);
+            this.lb_syssem.Name = "lb_syssem";
+            this.lb_syssem.Size = new System.Drawing.Size(602, 76);
+            this.lb_syssem.TabIndex = 13;
             // 
             // Market_comboB
             // 
@@ -364,7 +318,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 29);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(196, 439);
+            this.panel2.Size = new System.Drawing.Size(196, 356);
             this.panel2.TabIndex = 18;
             // 
             // stockinfo_tab
@@ -436,7 +390,7 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("宋体", 9F);
+            this.label25.Font = new System.Drawing.Font("SimSun", 9F);
             this.label25.Location = new System.Drawing.Point(89, 70);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(11, 12);
@@ -486,7 +440,7 @@
             // preprice_l
             // 
             this.preprice_l.AutoSize = true;
-            this.preprice_l.Font = new System.Drawing.Font("宋体", 9F);
+            this.preprice_l.Font = new System.Drawing.Font("SimSun", 9F);
             this.preprice_l.Location = new System.Drawing.Point(52, 50);
             this.preprice_l.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.preprice_l.Name = "preprice_l";
@@ -497,7 +451,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("宋体", 9F);
+            this.label16.Font = new System.Drawing.Font("SimSun", 9F);
             this.label16.Location = new System.Drawing.Point(8, 50);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(41, 12);
@@ -534,7 +488,7 @@
             // amplitude_l
             // 
             this.amplitude_l.AutoSize = true;
-            this.amplitude_l.Font = new System.Drawing.Font("宋体", 9F);
+            this.amplitude_l.Font = new System.Drawing.Font("SimSun", 9F);
             this.amplitude_l.Location = new System.Drawing.Point(52, 94);
             this.amplitude_l.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.amplitude_l.Name = "amplitude_l";
@@ -582,7 +536,7 @@
             // stockprice_l
             // 
             this.stockprice_l.AutoSize = true;
-            this.stockprice_l.Font = new System.Drawing.Font("宋体", 9F);
+            this.stockprice_l.Font = new System.Drawing.Font("SimSun", 9F);
             this.stockprice_l.Location = new System.Drawing.Point(52, 30);
             this.stockprice_l.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.stockprice_l.Name = "stockprice_l";
@@ -593,7 +547,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("宋体", 9F);
+            this.label7.Font = new System.Drawing.Font("SimSun", 9F);
             this.label7.Location = new System.Drawing.Point(8, 30);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(41, 12);
@@ -622,7 +576,7 @@
             // updownpercent_l
             // 
             this.updownpercent_l.AutoSize = true;
-            this.updownpercent_l.Font = new System.Drawing.Font("宋体", 9F);
+            this.updownpercent_l.Font = new System.Drawing.Font("SimSun", 9F);
             this.updownpercent_l.Location = new System.Drawing.Point(52, 70);
             this.updownpercent_l.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.updownpercent_l.Name = "updownpercent_l";
@@ -633,7 +587,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("宋体", 9F);
+            this.label5.Font = new System.Drawing.Font("SimSun", 9F);
             this.label5.Location = new System.Drawing.Point(2, 70);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(47, 12);
@@ -643,7 +597,7 @@
             // stockname_l
             // 
             this.stockname_l.AutoSize = true;
-            this.stockname_l.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold);
+            this.stockname_l.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold);
             this.stockname_l.Location = new System.Drawing.Point(52, 8);
             this.stockname_l.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.stockname_l.Name = "stockname_l";
@@ -654,7 +608,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold);
+            this.label4.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold);
             this.label4.Location = new System.Drawing.Point(5, 8);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(44, 12);
@@ -729,7 +683,7 @@
             // time_l
             // 
             this.time_l.AutoSize = true;
-            this.time_l.Font = new System.Drawing.Font("宋体", 9F);
+            this.time_l.Font = new System.Drawing.Font("SimSun", 9F);
             this.time_l.Location = new System.Drawing.Point(5, 18);
             this.time_l.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.time_l.Name = "time_l";
@@ -740,7 +694,7 @@
             // buy5v_l
             // 
             this.buy5v_l.AutoSize = true;
-            this.buy5v_l.Font = new System.Drawing.Font("宋体", 9F);
+            this.buy5v_l.Font = new System.Drawing.Font("SimSun", 9F);
             this.buy5v_l.Location = new System.Drawing.Point(108, 226);
             this.buy5v_l.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.buy5v_l.Name = "buy5v_l";
@@ -751,7 +705,7 @@
             // buy5p_l
             // 
             this.buy5p_l.AutoSize = true;
-            this.buy5p_l.Font = new System.Drawing.Font("宋体", 9F);
+            this.buy5p_l.Font = new System.Drawing.Font("SimSun", 9F);
             this.buy5p_l.Location = new System.Drawing.Point(44, 226);
             this.buy5p_l.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.buy5p_l.Name = "buy5p_l";
@@ -762,7 +716,7 @@
             // buy4v_l
             // 
             this.buy4v_l.AutoSize = true;
-            this.buy4v_l.Font = new System.Drawing.Font("宋体", 9F);
+            this.buy4v_l.Font = new System.Drawing.Font("SimSun", 9F);
             this.buy4v_l.Location = new System.Drawing.Point(108, 206);
             this.buy4v_l.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.buy4v_l.Name = "buy4v_l";
@@ -773,7 +727,7 @@
             // buy4p_l
             // 
             this.buy4p_l.AutoSize = true;
-            this.buy4p_l.Font = new System.Drawing.Font("宋体", 9F);
+            this.buy4p_l.Font = new System.Drawing.Font("SimSun", 9F);
             this.buy4p_l.Location = new System.Drawing.Point(44, 206);
             this.buy4p_l.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.buy4p_l.Name = "buy4p_l";
@@ -784,7 +738,7 @@
             // buy3v_l
             // 
             this.buy3v_l.AutoSize = true;
-            this.buy3v_l.Font = new System.Drawing.Font("宋体", 9F);
+            this.buy3v_l.Font = new System.Drawing.Font("SimSun", 9F);
             this.buy3v_l.Location = new System.Drawing.Point(108, 185);
             this.buy3v_l.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.buy3v_l.Name = "buy3v_l";
@@ -795,7 +749,7 @@
             // buy3p_l
             // 
             this.buy3p_l.AutoSize = true;
-            this.buy3p_l.Font = new System.Drawing.Font("宋体", 9F);
+            this.buy3p_l.Font = new System.Drawing.Font("SimSun", 9F);
             this.buy3p_l.Location = new System.Drawing.Point(44, 185);
             this.buy3p_l.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.buy3p_l.Name = "buy3p_l";
@@ -806,7 +760,7 @@
             // buy2v_l
             // 
             this.buy2v_l.AutoSize = true;
-            this.buy2v_l.Font = new System.Drawing.Font("宋体", 9F);
+            this.buy2v_l.Font = new System.Drawing.Font("SimSun", 9F);
             this.buy2v_l.Location = new System.Drawing.Point(108, 165);
             this.buy2v_l.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.buy2v_l.Name = "buy2v_l";
@@ -817,7 +771,7 @@
             // buy2p_l
             // 
             this.buy2p_l.AutoSize = true;
-            this.buy2p_l.Font = new System.Drawing.Font("宋体", 9F);
+            this.buy2p_l.Font = new System.Drawing.Font("SimSun", 9F);
             this.buy2p_l.Location = new System.Drawing.Point(44, 165);
             this.buy2p_l.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.buy2p_l.Name = "buy2p_l";
@@ -828,7 +782,7 @@
             // buy1v_l
             // 
             this.buy1v_l.AutoSize = true;
-            this.buy1v_l.Font = new System.Drawing.Font("宋体", 9F);
+            this.buy1v_l.Font = new System.Drawing.Font("SimSun", 9F);
             this.buy1v_l.ForeColor = System.Drawing.Color.Red;
             this.buy1v_l.Location = new System.Drawing.Point(108, 146);
             this.buy1v_l.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -840,7 +794,7 @@
             // buy1p_l
             // 
             this.buy1p_l.AutoSize = true;
-            this.buy1p_l.Font = new System.Drawing.Font("宋体", 9F);
+            this.buy1p_l.Font = new System.Drawing.Font("SimSun", 9F);
             this.buy1p_l.ForeColor = System.Drawing.Color.Red;
             this.buy1p_l.Location = new System.Drawing.Point(44, 146);
             this.buy1p_l.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -852,7 +806,7 @@
             // sell1v_l
             // 
             this.sell1v_l.AutoSize = true;
-            this.sell1v_l.Font = new System.Drawing.Font("宋体", 9F);
+            this.sell1v_l.Font = new System.Drawing.Font("SimSun", 9F);
             this.sell1v_l.ForeColor = System.Drawing.Color.Green;
             this.sell1v_l.Location = new System.Drawing.Point(108, 118);
             this.sell1v_l.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -864,7 +818,7 @@
             // sell1p_l
             // 
             this.sell1p_l.AutoSize = true;
-            this.sell1p_l.Font = new System.Drawing.Font("宋体", 9F);
+            this.sell1p_l.Font = new System.Drawing.Font("SimSun", 9F);
             this.sell1p_l.ForeColor = System.Drawing.Color.Green;
             this.sell1p_l.Location = new System.Drawing.Point(44, 118);
             this.sell1p_l.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -876,7 +830,7 @@
             // sell2v_l
             // 
             this.sell2v_l.AutoSize = true;
-            this.sell2v_l.Font = new System.Drawing.Font("宋体", 9F);
+            this.sell2v_l.Font = new System.Drawing.Font("SimSun", 9F);
             this.sell2v_l.Location = new System.Drawing.Point(108, 98);
             this.sell2v_l.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.sell2v_l.Name = "sell2v_l";
@@ -887,7 +841,7 @@
             // sell2p_l
             // 
             this.sell2p_l.AutoSize = true;
-            this.sell2p_l.Font = new System.Drawing.Font("宋体", 9F);
+            this.sell2p_l.Font = new System.Drawing.Font("SimSun", 9F);
             this.sell2p_l.Location = new System.Drawing.Point(44, 98);
             this.sell2p_l.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.sell2p_l.Name = "sell2p_l";
@@ -898,7 +852,7 @@
             // sell3v_l
             // 
             this.sell3v_l.AutoSize = true;
-            this.sell3v_l.Font = new System.Drawing.Font("宋体", 9F);
+            this.sell3v_l.Font = new System.Drawing.Font("SimSun", 9F);
             this.sell3v_l.Location = new System.Drawing.Point(108, 77);
             this.sell3v_l.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.sell3v_l.Name = "sell3v_l";
@@ -909,7 +863,7 @@
             // sell3p_l
             // 
             this.sell3p_l.AutoSize = true;
-            this.sell3p_l.Font = new System.Drawing.Font("宋体", 9F);
+            this.sell3p_l.Font = new System.Drawing.Font("SimSun", 9F);
             this.sell3p_l.Location = new System.Drawing.Point(44, 77);
             this.sell3p_l.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.sell3p_l.Name = "sell3p_l";
@@ -920,7 +874,7 @@
             // sell4v_l
             // 
             this.sell4v_l.AutoSize = true;
-            this.sell4v_l.Font = new System.Drawing.Font("宋体", 9F);
+            this.sell4v_l.Font = new System.Drawing.Font("SimSun", 9F);
             this.sell4v_l.Location = new System.Drawing.Point(108, 57);
             this.sell4v_l.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.sell4v_l.Name = "sell4v_l";
@@ -931,7 +885,7 @@
             // sell4p_l
             // 
             this.sell4p_l.AutoSize = true;
-            this.sell4p_l.Font = new System.Drawing.Font("宋体", 9F);
+            this.sell4p_l.Font = new System.Drawing.Font("SimSun", 9F);
             this.sell4p_l.Location = new System.Drawing.Point(44, 57);
             this.sell4p_l.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.sell4p_l.Name = "sell4p_l";
@@ -942,7 +896,7 @@
             // sell5v_l
             // 
             this.sell5v_l.AutoSize = true;
-            this.sell5v_l.Font = new System.Drawing.Font("宋体", 9F);
+            this.sell5v_l.Font = new System.Drawing.Font("SimSun", 9F);
             this.sell5v_l.Location = new System.Drawing.Point(108, 38);
             this.sell5v_l.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.sell5v_l.Name = "sell5v_l";
@@ -953,7 +907,7 @@
             // sell5p_l
             // 
             this.sell5p_l.AutoSize = true;
-            this.sell5p_l.Font = new System.Drawing.Font("宋体", 9F);
+            this.sell5p_l.Font = new System.Drawing.Font("SimSun", 9F);
             this.sell5p_l.Location = new System.Drawing.Point(44, 38);
             this.sell5p_l.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.sell5p_l.Name = "sell5p_l";
@@ -1073,24 +1027,25 @@
             // 
             this.systemDDB.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.systemDDB.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.系统参数ToolStripMenuItem});
+            this.SysSetMenuItem});
             this.systemDDB.Image = ((System.Drawing.Image)(resources.GetObject("systemDDB.Image")));
             this.systemDDB.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.systemDDB.Name = "systemDDB";
             this.systemDDB.Size = new System.Drawing.Size(45, 22);
             this.systemDDB.Text = "系统";
             // 
-            // 系统参数ToolStripMenuItem
+            // SysSetMenuItem
             // 
-            this.系统参数ToolStripMenuItem.Name = "系统参数ToolStripMenuItem";
-            this.系统参数ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.系统参数ToolStripMenuItem.Text = "系统参数";
+            this.SysSetMenuItem.Name = "SysSetMenuItem";
+            this.SysSetMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.SysSetMenuItem.Text = "系统参数配置";
             // 
             // desitionmakeDDB
             // 
             this.desitionmakeDDB.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.desitionmakeDDB.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.AdvDMMenuItem});
+            this.AdvDMMenuItem,
+            this.BAMenuItem});
             this.desitionmakeDDB.Image = ((System.Drawing.Image)(resources.GetObject("desitionmakeDDB.Image")));
             this.desitionmakeDDB.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.desitionmakeDDB.Name = "desitionmakeDDB";
@@ -1100,9 +1055,16 @@
             // AdvDMMenuItem
             // 
             this.AdvDMMenuItem.Name = "AdvDMMenuItem";
-            this.AdvDMMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.AdvDMMenuItem.Size = new System.Drawing.Size(152, 22);
             this.AdvDMMenuItem.Text = "高级决策";
             this.AdvDMMenuItem.Click += new System.EventHandler(this.AdvDMMenuItem_Click);
+            // 
+            // BAMenuItem
+            // 
+            this.BAMenuItem.Name = "BAMenuItem";
+            this.BAMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.BAMenuItem.Text = "批量分析";
+            this.BAMenuItem.Click += new System.EventHandler(this.BAMenuItem_Click);
             // 
             // helpDDButton
             // 
@@ -1126,8 +1088,9 @@
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStatusl,
-            this.toolProgressBar});
-            this.statusStrip.Location = new System.Drawing.Point(0, 474);
+            this.toolProgressBar,
+            this.tstatusLabel});
+            this.statusStrip.Location = new System.Drawing.Point(0, 525);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(1063, 22);
             this.statusStrip.TabIndex = 20;
@@ -1143,25 +1106,153 @@
             this.toolProgressBar.Name = "toolProgressBar";
             this.toolProgressBar.Size = new System.Drawing.Size(100, 16);
             // 
+            // tstatusLabel
+            // 
+            this.tstatusLabel.Name = "tstatusLabel";
+            this.tstatusLabel.Size = new System.Drawing.Size(0, 17);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.openfilebt);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.ClearFileBt);
+            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.button4);
+            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Location = new System.Drawing.Point(0, 389);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Size = new System.Drawing.Size(196, 131);
+            this.groupBox1.TabIndex = 21;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "信息抓取";
+            // 
+            // openfilebt
+            // 
+            this.openfilebt.Location = new System.Drawing.Point(7, 103);
+            this.openfilebt.Margin = new System.Windows.Forms.Padding(2);
+            this.openfilebt.Name = "openfilebt";
+            this.openfilebt.Size = new System.Drawing.Size(67, 23);
+            this.openfilebt.TabIndex = 17;
+            this.openfilebt.Text = "打开文件";
+            this.openfilebt.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(5, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(77, 12);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "提取间隔(ms)";
+            // 
+            // ClearFileBt
+            // 
+            this.ClearFileBt.Location = new System.Drawing.Point(88, 103);
+            this.ClearFileBt.Margin = new System.Windows.Forms.Padding(2);
+            this.ClearFileBt.Name = "ClearFileBt";
+            this.ClearFileBt.Size = new System.Drawing.Size(67, 23);
+            this.ClearFileBt.TabIndex = 8;
+            this.ClearFileBt.Text = "清空文件";
+            this.ClearFileBt.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(88, 19);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(52, 21);
+            this.textBox1.TabIndex = 5;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(56, 46);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(51, 23);
+            this.button4.TabIndex = 7;
+            this.button4.Text = "确定";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(7, 75);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(67, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "抓取开始";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(88, 75);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(67, 23);
+            this.button2.TabIndex = 2;
+            this.button2.Text = "抓取结束";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // lbusername
+            // 
+            this.lbusername.AutoSize = true;
+            this.lbusername.Location = new System.Drawing.Point(1001, 7);
+            this.lbusername.Name = "lbusername";
+            this.lbusername.Size = new System.Drawing.Size(29, 12);
+            this.lbusername.TabIndex = 22;
+            this.lbusername.Text = "null";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(926, 6);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(65, 12);
+            this.label3.TabIndex = 23;
+            this.label3.Text = "当前用户：";
+            // 
+            // cMSstock
+            // 
+            this.cMSstock.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TSMIAdvancedA,
+            this.TSMIDownloaddata});
+            this.cMSstock.Name = "cMSstock";
+            this.cMSstock.Size = new System.Drawing.Size(153, 70);
+            // 
+            // TSMIAdvancedA
+            // 
+            this.TSMIAdvancedA.Name = "TSMIAdvancedA";
+            this.TSMIAdvancedA.Size = new System.Drawing.Size(152, 22);
+            this.TSMIAdvancedA.Text = "高级分析";
+            this.TSMIAdvancedA.Click += new System.EventHandler(this.TSMIAdvancedA_Click);
+            // 
+            // TSMIDownloaddata
+            // 
+            this.TSMIDownloaddata.Name = "TSMIDownloaddata";
+            this.TSMIDownloaddata.Size = new System.Drawing.Size(152, 22);
+            this.TSMIDownloaddata.Text = "下载历史数据";
+            this.TSMIDownloaddata.Click += new System.EventHandler(this.TSMIDownloaddata_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1063, 496);
+            this.ClientSize = new System.Drawing.Size(1063, 547);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lbusername);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.gbOptionlist);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MarketInfo";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
+            this.gbOptionlist.ResumeLayout(false);
+            this.gbOptionlist.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -1178,22 +1269,17 @@
             this.toolStrip.PerformLayout();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.cMSstock.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Timer interval;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button ClearFileBt;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox gbOptionlist;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.PictureBox SH000001pB;
@@ -1265,19 +1351,36 @@
         private System.Windows.Forms.Label turnoverrate_l;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label time_l;
-        private System.Windows.Forms.Button openfilebt;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.ToolStrip toolStrip;
         private System.Windows.Forms.ToolStripDropDownButton helpDDButton;
         private System.Windows.Forms.ToolStripMenuItem 关于ToolStripMenuItem;
         private System.Windows.Forms.ToolStripDropDownButton desitionmakeDDB;
         private System.Windows.Forms.ToolStripMenuItem AdvDMMenuItem;
-        private System.Windows.Forms.Button getstockdatabt;
         private System.Windows.Forms.ToolStripDropDownButton systemDDB;
-        private System.Windows.Forms.ToolStripMenuItem 系统参数ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SysSetMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel toolStatusl;
         private System.Windows.Forms.ToolStripProgressBar toolProgressBar;
+        private System.Windows.Forms.ListBox lb_syssem;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button openfilebt;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button ClearFileBt;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label lbusername;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ToolStripMenuItem BAMenuItem;
+        private System.Windows.Forms.Button btipdbs;
+        private System.Windows.Forms.Button bt_dlstockdata;
+        private System.Windows.Forms.ToolStripStatusLabel tstatusLabel;
+        private System.Windows.Forms.Label lbstatusdl;
+        private System.Windows.Forms.ContextMenuStrip cMSstock;
+        private System.Windows.Forms.ToolStripMenuItem TSMIAdvancedA;
+        private System.Windows.Forms.ToolStripMenuItem TSMIDownloaddata;
     }
 }
 

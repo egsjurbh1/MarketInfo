@@ -58,4 +58,28 @@ C:\Users\Lenovo\Desktop\GTJA_F\MarketInfo\MarketInfo\bin\Debug\MarketInfo.pdb
 C:\Users\Lenovo\Desktop\GTJA_F\MarketInfo\MarketInfo\obj\Debug\MarketInfo.AboutForm.resources
 C:\Users\Lenovo\Desktop\GTJA_F\MarketInfo\MarketInfo\obj\Debug\MarketInfo.AdvancedDMForm.resources
 D:\Project\C#\MarketInfo\MarketInfo\obj\Debug\MarketInfo.AboutForm.resources
+C:\Project\MarketInfo\MarketInfo\bin\Debug\MarketInfo.exe.config
+C:\Project\MarketInfo\MarketInfo\obj\Debug\MarketInfo.exe
+C:\Project\MarketInfo\MarketInfo\obj\Debug\MarketInfo.pdb
+C:\Project\MarketInfo\MarketInfo\bin\Debug\MarketInfo.exe
+C:\Project\MarketInfo\MarketInfo\bin\Debug\MarketInfo.pdb
+C:\Project\MarketInfo\MarketInfo\obj\Debug\MarketInfo.csprojResolveAssemblyReference.cache
+C:\Project\MarketInfo\MarketInfo\obj\Debug\MarketInfo.AboutForm.resources
+C:\Project\MarketInfo\MarketInfo\obj\Debug\MarketInfo.MainForm.resources
+C:\Project\MarketInfo\MarketInfo\obj\Debug\MarketInfo.Properties.Resources.resources
+C:\Project\MarketInfo\MarketInfo\obj\Debug\MarketInfo.csproj.GenerateResource.Cache
+C:\Project\MarketInfo\MarketInfo\obj\Debug\MarketInfo.AdvStock.resources
 D:\Project\C#\MarketInfo\MarketInfo\obj\Debug\MarketInfo.AdvancedDMForm.resources
+D:\Project\C#\MarketInfo\MarketInfo\obj\Debug\MarketInfo.BatchAnalysisForm.resources
+\\vmware-host\Shared Folders\D\Project\C#\MarketInfo\MarketInfo\bin\Debug\MarketInfo.exe.config
+\\vmware-host\Shared Folders\D\Project\C#\MarketInfo\MarketInfo\obj\Debug\MarketInfo.exe
+\\vmware-host\Shared Folders\D\Project\C#\MarketInfo\MarketInfo\obj\Debug\MarketInfo.pdb
+\\vmware-host\Shared Folders\D\Project\C#\MarketInfo\MarketInfo\bin\Debug\MarketInfo.exe
+\\vmware-host\Shared Folders\D\Project\C#\MarketInfo\MarketInfo\bin\Debug\MarketInfo.pdb
+\\vmware-host\Shared Folders\D\Project\C#\MarketInfo\MarketInfo\obj\Debug\MarketInfo.csprojResolveAssemblyReference.cache
+\\vmware-host\Shared Folders\D\Project\C#\MarketInfo\MarketInfo\obj\Debug\MarketInfo.AboutForm.resources
+\\vmware-host\Shared Folders\D\Project\C#\MarketInfo\MarketInfo\obj\Debug\MarketInfo.AdvancedDMForm.resources
+\\vmware-host\Shared Folders\D\Project\C#\MarketInfo\MarketInfo\obj\Debug\MarketInfo.BatchAnalysisForm.resources
+\\vmware-host\Shared Folders\D\Project\C#\MarketInfo\MarketInfo\obj\Debug\MarketInfo.MainForm.resources
+\\vmware-host\Shared Folders\D\Project\C#\MarketInfo\MarketInfo\obj\Debug\MarketInfo.Properties.Resources.resources
+\\vmware-host\Shared Folders\D\Project\C#\MarketInfo\MarketInfo\obj\Debug\MarketInfo.csproj.GenerateResource.Cache

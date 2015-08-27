@@ -1,21 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Net;
 using System.IO;
-using System.Globalization;
 
 namespace MarketInfo
 {
     public partial class AdvancedDMForm : Form
     {
-        static string stock = "";
+        
         static DataTable stockdata = new DataTable();
 
         public AdvancedDMForm()
@@ -29,7 +22,7 @@ namespace MarketInfo
         /// </summary>
         private void Init()
         {
-            stock = "0";
+            AdvStock.mystock = "0";
             currentstockl.Text = "";
             result_dgv.Visible = false;
             flashpoint_dgv.Visible = false;
@@ -37,7 +30,7 @@ namespace MarketInfo
         }
 
         /// <summary>
-        /// Get stock code 
+        /// 获取股票代码 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -45,66 +38,37 @@ namespace MarketInfo
         {
             GeneralClass gc = new GeneralClass();
             string stockget = stockntb.Text;
+            Stock_Index si = new Stock_Index();
 
-            if (gc.stock_markettype(stockget) == 1 || gc.stock_markettype(stockget) == 2)
+            if (gc.stock_checkout(stockget, ref si))
             {
-                stock = stockget;
-                statusl.Text = stock + " Get";
-                currentstockl.Text = stock;
+                AdvStock.mystock = stockget;
+                statusl.Text = AdvStock.mystock + " Get";
+                currentstockl.Text = si.stockname;
             }
             else
                 MessageBox.Show("Error: " + stockget + " is not a stock code.");
         }
 
         /// <summary>
-        /// Download daliy history data
+        ///下载历史数据
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void getstockdatabt_Click(object sender, EventArgs e)
         {
             GeneralClass gc = new GeneralClass();
-            string filepath = CfgStruct.hisdatafilepath;
-            bool IsStockCode = false;
-
-            StringBuilder sburl = new StringBuilder(CfgStruct.market_daily_his_url);
-            sburl.Append(stock);
-            string newfilename = "\\" + stock + ".csv";
-            int market_code = gc.stock_markettype(stock);
-            switch (market_code)
-            {
-                case 1:
-                    sburl.Append(".ss");
-                    IsStockCode = true;
-                    break;
-                case 2:
-                    sburl.Append(".sz");
-                    IsStockCode = true;
-                    break;
-                default:
-                    MessageBox.Show("Stock code error!");
-                    IsStockCode = false;
-                    break;
-            }
-
-            if (IsStockCode)
-            {
-                statusl.Text = "Download " + stock + "……";
-                string url = sburl.ToString();
-
-                if (!gc.DownloadFile(url, filepath))
-                    MessageBox.Show(stock + " Download Error!");
-                else
-                {
-                    //每次下载覆盖
-                    File.Copy(filepath, Directory.GetCurrentDirectory() + newfilename, true);
-                    statusl.Text = "Download " + stock + ".csv" + " Successed";
-                }
-            }
+            
+            statusl.Text = "Download " + AdvStock.mystock + "……";
+            string stkcode = AdvStock.mystock;
+            if (!gc.downloadstockdata(stkcode))
+                statusl.Text = "Download " + AdvStock.mystock + ".csv" + " Failed";
+            else         
+                statusl.Text = "Download " + AdvStock.mystock + ".csv" + " Successed";  
         }
 
         /// <summary>
-        /// Textbox real-time dectction
+        ///股票代码检查
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -122,37 +86,37 @@ namespace MarketInfo
         }
 
         /// <summary>
-        /// open history data file
+        /// 打开历史数据文件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void openhisdata_bt_Click(object sender, EventArgs e)
         {
-            string filepath = Directory.GetCurrentDirectory() + "\\" + stock + ".csv";
+            string filepath = Directory.GetCurrentDirectory() + "\\" + AdvStock.mystock + ".csv";
             if (File.Exists(filepath))
                 System.Diagnostics.Process.Start(filepath);
             else
-                MessageBox.Show("File " + stock + ".csv" + " not exist.");
+                MessageBox.Show("File " + AdvStock.mystock + ".csv" + " not exist.");
         }
 
         /// <summary>
-        /// Delete history file
+        /// 删除历史数据文件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void deletehisfile_bt_Click(object sender, EventArgs e)
         {
-            string filepath = Directory.GetCurrentDirectory() + "\\" + stock + ".csv";
+            string filepath = Directory.GetCurrentDirectory() + "\\" + AdvStock.mystock + ".csv";
             if (File.Exists(filepath))
             {
                 File.Delete(filepath);
-                statusl.Text = "Delete " + stock + ".csv" + " successed.";
+                statusl.Text = "Delete " + AdvStock.mystock + ".csv" + " successed.";
             }
             else
-                MessageBox.Show("File " + stock + ".csv" + " not exist.");
+                MessageBox.Show("File " + AdvStock.mystock + ".csv" + " not exist.");
         }
         /// <summary>
-        /// Import data to DataTable
+        /// 导入数据到DataTable
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -160,24 +124,24 @@ namespace MarketInfo
         {
             GeneralClass gc = new GeneralClass();
 
-            string filepath = Directory.GetCurrentDirectory() + "\\" + stock + ".csv";
+            string filepath = Directory.GetCurrentDirectory() + "\\" + AdvStock.mystock + ".csv";
             if (File.Exists(filepath))
             {
-                statusl.Text = "Importing " + stock + ".csv" + "……";
+                statusl.Text = "Importing " + AdvStock.mystock + ".csv" + "……";
                 stockdata.Clear();
                 stockdata = gc.OpenCSV(filepath);
-                statusl.Text = stock + ".csv" + " data Get.";
+                statusl.Text = AdvStock.mystock + ".csv" + " data Get.";
                 dataGridView.Visible = true;
                 dataGridView.DataSource = stockdata;
                 dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;    //auto columns width
-                DatagBox.Text = "Data: " + stock;
+                DatagBox.Text = "Data: " + AdvStock.mystock;
                 go_bt.Enabled = true;
             }
             else
-                MessageBox.Show("File " + stock + ".csv" + " not exist.");
+                MessageBox.Show("File " + AdvStock.mystock + ".csv" + " not exist.");
         }
         /// <summary>
-        /// go and analysis
+        /// 分析数据
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -202,6 +166,8 @@ namespace MarketInfo
             result_dt.Columns.Add(sdevratiovolume_dc);
             DataColumn prate_dc = new DataColumn("GrowthRatio%");
             result_dt.Columns.Add(prate_dc);
+            DataColumn aprate_dc = new DataColumn("AGrowthRatio%");
+            result_dt.Columns.Add(aprate_dc);
 
             //stock_trend analysis
             DateTime begintime = begintime_dtp.Value;
@@ -221,6 +187,7 @@ namespace MarketInfo
             workrow[avgprice_dc] = Stock_Index.win_avgprice.ToString("f2");
             workrow[avgvolume_dc] = Stock_Index.win_avgvolume / 100;
             workrow[prate_dc] = (Stock_Index.win_prate * 100).ToString("f2");
+            workrow[aprate_dc] = (Stock_Index.win_aprate * 100).ToString("f2");
             workrow[sdevprice_dc] = Stock_Index.win_sdevprice.ToString("f2");
             workrow[sdevvolume_dc] = Stock_Index.win_sdevvolume / 100;
             workrow[sdevratioprice_dc] = (Stock_Index.win_sdevprice / Stock_Index.win_avgprice * 100).ToString("f2");
