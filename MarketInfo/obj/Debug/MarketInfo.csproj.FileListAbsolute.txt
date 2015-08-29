@@ -83,3 +83,30 @@ D:\Project\C#\MarketInfo\MarketInfo\obj\Debug\MarketInfo.BatchAnalysisForm.resou
 \\vmware-host\Shared Folders\D\Project\C#\MarketInfo\MarketInfo\obj\Debug\MarketInfo.MainForm.resources
 \\vmware-host\Shared Folders\D\Project\C#\MarketInfo\MarketInfo\obj\Debug\MarketInfo.Properties.Resources.resources
 \\vmware-host\Shared Folders\D\Project\C#\MarketInfo\MarketInfo\obj\Debug\MarketInfo.csproj.GenerateResource.Cache
+E:\Download\ChromeDown\MarketInfo-master\MarketInfo\bin\Debug\MarketInfo.exe.config
+E:\Download\ChromeDown\MarketInfo-master\MarketInfo\bin\Debug\MarketInfo.exe
+E:\Download\ChromeDown\MarketInfo-master\MarketInfo\bin\Debug\MarketInfo.pdb
+E:\Download\ChromeDown\MarketInfo-master\MarketInfo\obj\Debug\MarketInfo.csprojResolveAssemblyReference.cache
+E:\Download\ChromeDown\MarketInfo-master\MarketInfo\obj\Debug\MarketInfo.AboutForm.resources
+E:\Download\ChromeDown\MarketInfo-master\MarketInfo\obj\Debug\MarketInfo.AdvancedDMForm.resources
+E:\Download\ChromeDown\MarketInfo-master\MarketInfo\obj\Debug\MarketInfo.BatchAnalysisForm.resources
+E:\Download\ChromeDown\MarketInfo-master\MarketInfo\obj\Debug\MarketInfo.MainForm.resources
+E:\Download\ChromeDown\MarketInfo-master\MarketInfo\obj\Debug\MarketInfo.Properties.Resources.resources
+E:\Download\ChromeDown\MarketInfo-master\MarketInfo\obj\Debug\MarketInfo.csproj.GenerateResource.Cache
+E:\Download\ChromeDown\MarketInfo-master\MarketInfo\obj\Debug\MarketInfo.exe
+E:\Download\ChromeDown\MarketInfo-master\MarketInfo\obj\Debug\MarketInfo.pdb
+C:\Users\hyl\Desktop\MarketInfo-master\MarketInfo\bin\Debug\MarketInfo.exe.config
+C:\Users\hyl\Desktop\MarketInfo-master\MarketInfo\obj\Debug\MarketInfo.exe
+C:\Users\hyl\Desktop\MarketInfo-master\MarketInfo\obj\Debug\MarketInfo.pdb
+C:\Users\hyl\Desktop\MarketInfo-master\MarketInfo\bin\Debug\MarketInfo.exe
+C:\Users\hyl\Desktop\MarketInfo-master\MarketInfo\bin\Debug\MarketInfo.pdb
+C:\Users\hyl\Desktop\MarketInfo-master\MarketInfo\obj\Debug\MarketInfo.csprojResolveAssemblyReference.cache
+C:\Users\hyl\Desktop\MarketInfo-master\MarketInfo\obj\Debug\MarketInfo.AboutForm.resources
+C:\Users\hyl\Desktop\MarketInfo-master\MarketInfo\obj\Debug\MarketInfo.AdvancedDMForm.resources
+C:\Users\hyl\Desktop\MarketInfo-master\MarketInfo\obj\Debug\MarketInfo.BatchAnalysisForm.resources
+C:\Users\hyl\Desktop\MarketInfo-master\MarketInfo\obj\Debug\MarketInfo.MainForm.resources
+C:\Users\hyl\Desktop\MarketInfo-master\MarketInfo\obj\Debug\MarketInfo.Properties.Resources.resources
+C:\Users\hyl\Desktop\MarketInfo-master\MarketInfo\obj\Debug\MarketInfo.csproj.GenerateResource.Cache
+D:\Data\VS2012_Workspace\VS_Git\MarketInfo\MarketInfo\bin\Debug\MarketInfo.exe.config
+D:\Data\VS2012_Workspace\VS_Git\MarketInfo\MarketInfo\obj\Debug\MarketInfo.exe
+D:\Data\VS2012_Workspace\VS_Git\MarketInfo\MarketInfo\obj\Debug\MarketInfo.pdb

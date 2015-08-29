@@ -60,9 +60,11 @@ namespace MarketInfo
                 MessageBox.Show("-10001数据库连接失败！请重新配置。");
                 return;
             }
+       
             //读系统配置信息
             if (!gc.GetSysConfigFromDB(ref errorMsg))
             {
+                MessageBox.Show(errorMsg);
                 MessageBox.Show("-10002数据库配置信息有误！请重新配置");
                 return;
             }
@@ -114,9 +116,9 @@ namespace MarketInfo
         private void RefreshOptionlist()
         {
             optionallist.Items.Clear();
-            foreach (string stkcode in CfgStruct.lns)
+            foreach (string stkcodename in CfgStruct.lns)
             {
-                optionallist.Items.Add(stkcode); //列表显示
+                optionallist.Items.Add(stkcodename); //列表显示
             }
             //显示个数
             gbOptionlist.Text = "自选" + "(" + CfgStruct.lns.Count.ToString() +")";
@@ -129,9 +131,11 @@ namespace MarketInfo
         /// <param name="e"></param>
         private void optionallist_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string stockget = optionallist.Text;
+            string stockget = optionallist.Text.Split(' ')[0];
+
             Stock_Index si = new Stock_Index();
             GeneralClass gc = new GeneralClass();
+
             //检验股票代码是否正确
             if (!gc.stock_checkout(stockget, ref si))
             {
@@ -139,10 +143,14 @@ namespace MarketInfo
                 MessageBox.Show("e-100001股票代码不正确，已删除.");
                 return;
             }
+            
+            stockntb.Text = stockget;
             CfgStruct.stockcur = stockget;
             lb_syssem.Items.Clear();
+               
             string showstock = "当前选择：" + si.stockname;
             lb_syssem.Items.Add(showstock);
+
             //实时行情获取
             Cycle_stockmarket(sender, e);
         }
@@ -161,7 +169,8 @@ namespace MarketInfo
             //校验是否重复
             foreach (string s in CfgStruct.lns)
             {
-                if (s == stkcode)
+                string _stkcode = s.Split(' ')[0];
+                if (_stkcode == stkcode)
                 {
                     MessageBox.Show("自选股列表存在该股票，请勿重复添加");
                     return;
@@ -171,15 +180,19 @@ namespace MarketInfo
             if (!gc.stock_checkout(stkcode, ref si))
             {
                 MessageBox.Show("e-101001股票代码有误");
-                stockntb.Text = "";
+                //stockntb.Text = "";
                 return;
             }
+
             if(!gc.ModiUserStocklistFromDB(CfgStruct.curuserid, stkcode, FlagDef.ADD))
             {
                 MessageBox.Show("e-101002向数据库增加个股失败");
                 return;
             }
+
             RefreshOptionlist();
+            stockntb.Text = "";
+            stockntb.Focus();
         }
 
         /// <summary>
@@ -198,19 +211,25 @@ namespace MarketInfo
             GeneralClass gc = new GeneralClass();
             string stkcode = stockntb.Text;
             Stock_Index si = new Stock_Index();
+
             //校验stkcode
             if (!gc.stock_checkout(stkcode, ref si))
             {
                 MessageBox.Show("e-102001股票代码有误");
-                stockntb.Text = "";
+                //stockntb.Text = "";
                 return;
             }
+
+            //在数据库中删除
             if (!gc.ModiUserStocklistFromDB(CfgStruct.curuserid, stkcode, FlagDef.REMOVE))
             {
                 MessageBox.Show("e-102002向数据库删除个股失败");
                 return;
             }
+          
             RefreshOptionlist();
+            stockntb.SelectAll();
+            stockntb.Focus();
         }
 
         /// <summary>
@@ -328,7 +347,6 @@ namespace MarketInfo
             stock_appendurl(CfgStruct.stockcur, ref CfgStruct.stockurl, CfgStruct.market_timeline, true);
             Market_comboB.SelectedItem = "分时";
 
-            stockntb.Text = optionallist.Text;
             stock_t_Tick(sender, e);
         }
                 
@@ -717,6 +735,11 @@ namespace MarketInfo
         private void TSMIDownloaddata_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 

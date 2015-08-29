@@ -49,7 +49,7 @@ namespace MarketInfo
             catch (SqlException ae)
             {
                 MessageBox.Show(ae.Message.ToString());
-            }
+            }      
             conn.Close();
             return true;
         }
@@ -69,6 +69,7 @@ namespace MarketInfo
                 conn.Open();
             // 执行sql，返回dt
             SqlDataAdapter adpt = new SqlDataAdapter(sql, conn);
+
             adpt.Fill(dt);
             conn.Close();
             return true;     

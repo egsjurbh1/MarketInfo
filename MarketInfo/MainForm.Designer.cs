@@ -41,6 +41,9 @@
             this.stockntb = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.optionallist = new System.Windows.Forms.ListBox();
+            this.cMSstock = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.TSMIAdvancedA = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMIDownloaddata = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.lb_syssem = new System.Windows.Forms.ListBox();
             this.Market_comboB = new System.Windows.Forms.ComboBox();
@@ -130,11 +133,9 @@
             this.button2 = new System.Windows.Forms.Button();
             this.lbusername = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.cMSstock = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.TSMIAdvancedA = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMIDownloaddata = new System.Windows.Forms.ToolStripMenuItem();
             this.gbOptionlist.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.cMSstock.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SH000001pB)).BeginInit();
             this.panel2.SuspendLayout();
@@ -145,7 +146,6 @@
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.cMSstock.SuspendLayout();
             this.SuspendLayout();
             // 
             // interval
@@ -260,6 +260,28 @@
             this.optionallist.Sorted = true;
             this.optionallist.TabIndex = 13;
             this.optionallist.SelectedIndexChanged += new System.EventHandler(this.optionallist_SelectedIndexChanged);
+            // 
+            // cMSstock
+            // 
+            this.cMSstock.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TSMIAdvancedA,
+            this.TSMIDownloaddata});
+            this.cMSstock.Name = "cMSstock";
+            this.cMSstock.Size = new System.Drawing.Size(149, 48);
+            // 
+            // TSMIAdvancedA
+            // 
+            this.TSMIAdvancedA.Name = "TSMIAdvancedA";
+            this.TSMIAdvancedA.Size = new System.Drawing.Size(148, 22);
+            this.TSMIAdvancedA.Text = "高级分析";
+            this.TSMIAdvancedA.Click += new System.EventHandler(this.TSMIAdvancedA_Click);
+            // 
+            // TSMIDownloaddata
+            // 
+            this.TSMIDownloaddata.Name = "TSMIDownloaddata";
+            this.TSMIDownloaddata.Size = new System.Drawing.Size(148, 22);
+            this.TSMIDownloaddata.Text = "下载历史数据";
+            this.TSMIDownloaddata.Click += new System.EventHandler(this.TSMIDownloaddata_Click);
             // 
             // groupBox3
             // 
@@ -1055,14 +1077,14 @@
             // AdvDMMenuItem
             // 
             this.AdvDMMenuItem.Name = "AdvDMMenuItem";
-            this.AdvDMMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.AdvDMMenuItem.Size = new System.Drawing.Size(124, 22);
             this.AdvDMMenuItem.Text = "高级决策";
             this.AdvDMMenuItem.Click += new System.EventHandler(this.AdvDMMenuItem_Click);
             // 
             // BAMenuItem
             // 
             this.BAMenuItem.Name = "BAMenuItem";
-            this.BAMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.BAMenuItem.Size = new System.Drawing.Size(124, 22);
             this.BAMenuItem.Text = "批量分析";
             this.BAMenuItem.Click += new System.EventHandler(this.BAMenuItem_Click);
             // 
@@ -1210,28 +1232,6 @@
             this.label3.TabIndex = 23;
             this.label3.Text = "当前用户：";
             // 
-            // cMSstock
-            // 
-            this.cMSstock.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TSMIAdvancedA,
-            this.TSMIDownloaddata});
-            this.cMSstock.Name = "cMSstock";
-            this.cMSstock.Size = new System.Drawing.Size(153, 70);
-            // 
-            // TSMIAdvancedA
-            // 
-            this.TSMIAdvancedA.Name = "TSMIAdvancedA";
-            this.TSMIAdvancedA.Size = new System.Drawing.Size(152, 22);
-            this.TSMIAdvancedA.Text = "高级分析";
-            this.TSMIAdvancedA.Click += new System.EventHandler(this.TSMIAdvancedA_Click);
-            // 
-            // TSMIDownloaddata
-            // 
-            this.TSMIDownloaddata.Name = "TSMIDownloaddata";
-            this.TSMIDownloaddata.Size = new System.Drawing.Size(152, 22);
-            this.TSMIDownloaddata.Text = "下载历史数据";
-            this.TSMIDownloaddata.Click += new System.EventHandler(this.TSMIDownloaddata_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1251,10 +1251,12 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MarketInfo";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.gbOptionlist.ResumeLayout(false);
             this.gbOptionlist.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.cMSstock.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SH000001pB)).EndInit();
@@ -1271,7 +1273,6 @@
             this.statusStrip.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.cMSstock.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
