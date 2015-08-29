@@ -250,7 +250,7 @@ namespace MarketInfo
             sql = null;
             //查stocklist
             //sql = "select stocklist from" + CfgStruct.dbname + "cust_stockinfo where userid = " + userid.ToString();
-            sql = "select stockcode,stockname from" + CfgStruct.dbname + "custselectstock where userid = " + userid.ToString();
+            sql = "select stkcode,stkname from" + CfgStruct.dbname + "custselectstock where userid = " + userid.ToString();
 
             sp.ExecSingleSQL(CfgStruct.dbconnect_str, sql, dt);
             //若未查到配置信息，返回false
@@ -260,7 +260,7 @@ namespace MarketInfo
 
             foreach (DataRow dr2 in dt.Rows)
             {
-                CfgStruct.lns.Add(dr2["stockcode"].ToString().Trim() + ' ' + dr2["stockname"].ToString().Trim());
+                CfgStruct.lns.Add(dr2["stkcode"].ToString().Trim() + ' ' + dr2["stkname"].ToString().Trim());
                 //Response.Write(dr2["kjny"].ToString() + "<br>");
             }
 
@@ -315,7 +315,7 @@ namespace MarketInfo
                     {
                         if (s.Split(' ')[0] == stkcode)
                         {
-                            sql = "delete" + CfgStruct.dbname + "custselectstock where userid='" + userid.ToString() + "' and stockcode='" + stkcode.ToString() + "'";
+                            sql = "delete" + CfgStruct.dbname + "custselectstock where userid='" + userid.ToString() + "' and stkcode='" + stkcode.ToString() + "'";
                             CfgStruct.lns.Remove(s);
                             break;
                         }

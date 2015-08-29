@@ -110,3 +110,12 @@ C:\Users\hyl\Desktop\MarketInfo-master\MarketInfo\obj\Debug\MarketInfo.csproj.Ge
 D:\Data\VS2012_Workspace\VS_Git\MarketInfo\MarketInfo\bin\Debug\MarketInfo.exe.config
 D:\Data\VS2012_Workspace\VS_Git\MarketInfo\MarketInfo\obj\Debug\MarketInfo.exe
 D:\Data\VS2012_Workspace\VS_Git\MarketInfo\MarketInfo\obj\Debug\MarketInfo.pdb
+D:\Data\VS2012_Workspace\VS_Git\MarketInfo\MarketInfo\bin\Debug\MarketInfo.exe
+D:\Data\VS2012_Workspace\VS_Git\MarketInfo\MarketInfo\bin\Debug\MarketInfo.pdb
+D:\Data\VS2012_Workspace\VS_Git\MarketInfo\MarketInfo\obj\Debug\MarketInfo.csprojResolveAssemblyReference.cache
+D:\Data\VS2012_Workspace\VS_Git\MarketInfo\MarketInfo\obj\Debug\MarketInfo.AboutForm.resources
+D:\Data\VS2012_Workspace\VS_Git\MarketInfo\MarketInfo\obj\Debug\MarketInfo.AdvancedDMForm.resources
+D:\Data\VS2012_Workspace\VS_Git\MarketInfo\MarketInfo\obj\Debug\MarketInfo.BatchAnalysisForm.resources
+D:\Data\VS2012_Workspace\VS_Git\MarketInfo\MarketInfo\obj\Debug\MarketInfo.MainForm.resources
+D:\Data\VS2012_Workspace\VS_Git\MarketInfo\MarketInfo\obj\Debug\MarketInfo.Properties.Resources.resources
+D:\Data\VS2012_Workspace\VS_Git\MarketInfo\MarketInfo\obj\Debug\MarketInfo.csproj.GenerateResource.Cache
