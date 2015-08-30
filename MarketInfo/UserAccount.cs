@@ -18,7 +18,7 @@ namespace MarketInfo
             SqlProcess sp = new SqlProcess();
             DataTable dt = new DataTable();
 
-            string sql = "select userid, pwd from run..customer where username = '" + username + "';";
+            string sql = "select userid, pwd from market..customer where username = '" + username + "';";
             sp.ExecSingleSQL(CfgStruct.dbconnect_str, sql, dt);
             
             //未查到

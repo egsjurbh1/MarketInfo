@@ -55,11 +55,11 @@ namespace MarketInfo
     class GeneralClass
     {
         public string Stkcode { get; set; } //股票代码
-        
+
         //正则表达式判断
         public bool IsInt(string str)
         {
-            string regextext = @"^(-?\d+)(\.\d+)?$";
+            string regextext = @"^\d*$";
             Regex regex = new Regex(regextext, RegexOptions.None);
             return regex.IsMatch(str.Trim());
         }
@@ -130,11 +130,17 @@ namespace MarketInfo
             SqlProcess sp = new SqlProcess();
             DataTable dt = new DataTable();
 
+
             string sql = "select keyname, keyvalue, sysstatus from" + CfgStruct.dbname + "sysconfig";
+            //string sql = "select keyname, keyvalue, sysstatus from stockmarket..sysconfig";
             sp.ExecSingleSQL(CfgStruct.dbconnect_str, sql, dt);
             //若未查到配置信息，返回false
             if (dt.Rows.Count == 0)
+            {
+                errorMsg = "no data!";
                 return false;
+            }
+
 
             //查找各项配置的值
             DataRow[] dr;
@@ -202,16 +208,17 @@ namespace MarketInfo
             DataTable dt = new DataTable();
 
             //查stock
-            string sql = "select stkcode,market,stkname from"+ CfgStruct.dbname + dbtable + "where stkcode =" + "'" + stock +"'";
+            string sql = "select stkcode,market,stkname from" + CfgStruct.dbname + dbtable + "where stkcode =" + "'" + stock + "'";          
             sp.ExecSingleSQL(CfgStruct.dbconnect_str, sql, dt);
             //若未查到股票，返回false
             if (dt.Rows.Count == 0)
                 return false;
             else
                 stockget = dt.Rows[0]["stkcode"].ToString().Trim(); //去掉空格
-            
+
             //比较所选证券代码在DB中是否一致
             if (String.Compare(stock, stockget) == 0)
+            //if (String.Compare(stockcode, stockget) == 0)
             {
                 si.market = Convert.ToInt32(dt.Rows[0]["market"].ToString().Trim());
                 si.stockname = dt.Rows[0]["stkname"].ToString().Trim();
@@ -231,7 +238,7 @@ namespace MarketInfo
         {
             SqlProcess sp = new SqlProcess();
             DataTable dt = new DataTable();
-            
+
             //查username
             string sql = "select username from" + CfgStruct.dbname + "customer where userid = " + userid.ToString();
             sp.ExecSingleSQL(CfgStruct.dbconnect_str, sql, dt);
@@ -242,19 +249,33 @@ namespace MarketInfo
             dt.Clear();
             sql = null;
             //查stocklist
-            sql = "select stocklist from" + CfgStruct.dbname + "cust_stockinfo where userid = " + userid.ToString();
+            //sql = "select stocklist from" + CfgStruct.dbname + "cust_stockinfo where userid = " + userid.ToString();
+            sql = "select stkcode,stkname from" + CfgStruct.dbname + "custselectstock where userid = " + userid.ToString();
+
             sp.ExecSingleSQL(CfgStruct.dbconnect_str, sql, dt);
             //若未查到配置信息，返回false
             if (dt.Rows.Count == 0)
                 return false;
-            string stocklist = dt.Rows[0]["stocklist"].ToString().Trim();
-            string[] slist = stocklist.Split(',');
+            //string stocklist = dt.Rows[0]["stocklist"].ToString().Trim();
+
+            foreach (DataRow dr2 in dt.Rows)
+            {
+                CfgStruct.lns.Add(dr2["stkcode"].ToString().Trim() + ' ' + dr2["stkname"].ToString().Trim());
+                //Response.Write(dr2["kjny"].ToString() + "<br>");
+            }
+
+
+            //string[] slist = stocklist.Split(',');
             //加入到自选列表缓存
+
+            /*
             foreach (string stkcode in slist)
             {
                 if(stkcode != "")
                     CfgStruct.lns.Add(stkcode);
             }
+            */
+
 
             return true;
         }
@@ -267,19 +288,34 @@ namespace MarketInfo
         /// <returns></returns>
         public bool ModiUserStocklistFromDB(int userid, string stkcode, int functype)
         {
+            SqlProcess sp = new SqlProcess();
+            DataTable dt = new DataTable();
+            string sql = null;
+
             //功能判断
             switch (functype)
             {
                 case FlagDef.ADD:
-                    //加入到当前自选列表
-                    CfgStruct.lns.Add(stkcode);
-                    break;
+                    {
+                        string selectstkname = "select stkname from" + CfgStruct.dbname + " stock where stkcode=" + stkcode;
+                        sp.ExecSingleSQL(CfgStruct.dbconnect_str, selectstkname, dt);
+                        if (dt.Rows.Count == 0)
+                            return false;
+                        string stkname = dt.Rows[0]["stkname"].ToString().Trim();
+                        sql = "insert" + CfgStruct.dbname + "custselectstock values('" + userid.ToString() + "','" + stkcode.ToString() + "','" + stkname.ToString() + "')";
+
+                        //加入到当前自选列表
+                        CfgStruct.lns.Add(stkcode + " " + stkname);
+                        break;
+                    }
+
                 case FlagDef.REMOVE:
                     //删除当前自选列表中stkcode
                     foreach (string s in CfgStruct.lns)
                     {
-                        if (s == stkcode)
+                        if (s.Split(' ')[0] == stkcode)
                         {
+                            sql = "delete" + CfgStruct.dbname + "custselectstock where userid='" + userid.ToString() + "' and stkcode='" + stkcode.ToString() + "'";
                             CfgStruct.lns.Remove(s);
                             break;
                         }
@@ -288,18 +324,8 @@ namespace MarketInfo
                 default:
                     break;
             }
-       
-            //生成stklist
-            string stklist = null;
-            foreach(string s in CfgStruct.lns)
-            {
-                stklist = stklist + s + ',';
-            }
 
-            //更新stklist
-            SqlProcess sp = new SqlProcess();
-            string sql = "Update" + CfgStruct.dbname + "cust_stockinfo set stocklist = '" + stklist + "' where userid = " + userid.ToString();
-            if(!sp.ExecSingleSQL(CfgStruct.dbconnect_str, sql))
+            if (!sp.ExecSingleSQL(CfgStruct.dbconnect_str, sql))
                 return false;
             return true;
         }
@@ -458,7 +484,7 @@ namespace MarketInfo
             fs.Close();
             return dt;
         }
-        
+
         /// <summary>
         /// 下载指定股票的历史数据
         /// </summary>
